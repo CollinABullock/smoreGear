@@ -3,26 +3,31 @@ const { createUser } = require('./users');
 
 const users = [
   {
+    userID: 1,
     name: 'Emily Johnson',
     email: 'emily@example.com',
     password: 'securepass',
   },
   {
+    userID: 2,
     name: 'Liu Wei',
     email: 'liu@example.com',
     password: 'strongpass',
   },
   {
+    userID: 3,
     name: 'Isabella García',
     email: 'bella@example.com',
     password: 'pass1234',
   },
   {
+    userID: 4,
     name: 'Mohammed Ahmed',
     email: 'mohammed@example.com',
     password: 'mysecretpassword',
   },
   {
+    userID: 5,
     name: 'John Smith',
     email: 'john@example.com',
     password: 'password123',
