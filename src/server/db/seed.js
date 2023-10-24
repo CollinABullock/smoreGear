@@ -44,22 +44,23 @@ const dropTables = async () => {
 
 const createTables = async () => {
     try{
+      console.log("Starting to build tables...");
+
         await db.query(`
         CREATE TABLE users(
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) DEFAULT 'name',
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL
-        )`)
-
-        await db.query(`
+        );
         CREATE TABLE products(
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             description TEXT NOT NULL,
-            price INTEGER NOT NULL, 
+            price INTEGER NOT NULL 
 
-        )`)
+        );
+        `);
         console.log("Finished building tables!");
     }
     catch(err) {
@@ -79,7 +80,7 @@ const insertUsers = async () => {
   }
 };
 
-const seedDatabse = async () => {
+const seedDatabase = async () => {
     try {
         db.connect();
         await dropTables();
@@ -94,4 +95,4 @@ const seedDatabse = async () => {
     }
 }
 
-seedDatabse()
+seedDatabase()
