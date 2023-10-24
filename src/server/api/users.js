@@ -4,7 +4,9 @@ const usersRouter = express.Router();
 const {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUsers,
+    updateUser,
 } = require('../db');
 
 const jwt = require('jsonwebtoken')
@@ -89,5 +91,14 @@ usersRouter.post('/register', async(req, res, next) => {
         next({name, message})
     }
 })
+
+usersRouter.patch('/:id', async (req, res, next) => {
+    try {
+        const updatedUsers = await updateUser(req.params.id, req.body);
+        res.send(updatedUsers)
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = usersRouter;
