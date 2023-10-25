@@ -2,10 +2,18 @@ const express = require('express');
 const productsRouter = express.Router();
 
 const {
-    getAllProducts
+    getAllProducts,
+    updateProduct
 } = require('../db');
 
-
+productsRouter.patch('/:id', async (req, res, next) => {
+  try {
+      const updatedProduct = await updateProduct(req.params.id, req.body);
+      res.send(updatedProduct)
+  } catch (error) {
+      console.log(error);
+  }
+});
 
 productsRouter.get('/', async( req, res, next) => {
     try {
