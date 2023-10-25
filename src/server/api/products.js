@@ -2,15 +2,24 @@ const express = require('express');
 const productsRouter = express.Router();
 
 const {
-    getAllProducts, createProduct
+    createProduct
+    getAllProducts,
+    updateProduct
 } = require('../db');
 
-
+productsRouter.patch('/:id', async (req, res, next) => {
+  try {
+      const updatedProduct = await updateProduct(req.params.id, req.body);
+      res.send(updatedProduct)
+  } catch (error) {
+      console.log(error);
+  }
+});
 
 productsRouter.get('/', async( req, res, next) => {
     try {
         const products = await getAllProducts();
-
+      console.log("products", products);
         res.send({
             products
         });
@@ -18,6 +27,7 @@ productsRouter.get('/', async( req, res, next) => {
         next({name, message})
     }
 });
+
 
 productsRouter.post('/', async(req, res, next) => {
    const {name, description, price = ""} = req.body;
@@ -45,3 +55,4 @@ productsRouter.post('/', async(req, res, next) => {
     }
 })
 module.exports = productsRouter;
+
