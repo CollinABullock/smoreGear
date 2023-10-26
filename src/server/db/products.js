@@ -78,8 +78,22 @@ async function getAllProducts() {
     }
   }
 
+  async function deleteProductsById(productsId) {
+    try {
+        const { rows: [products] } = await db.query(`
+        DELETE FROM products
+        WHERE id=$1
+        RETURNING *;
+        `, [productsId]);
+        return products;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     createProduct,
     updateProduct,
-    getAllProducts
+    getAllProducts,
+    deleteProductsById
 };

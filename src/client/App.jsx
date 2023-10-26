@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { Routes, Route, Link, useNavigate, BrowserRouter } from "react-router-dom";
+import AllUsers from './components/allUsers';
 import Login from './components/Login';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <div className='App'>
-        
-    </div>
+    <>
+    <BrowserRouter>
+<Routes>
+  <Route path="/" element={<Login />} />
+  <Route path="/users" element={<AllUsers />} />
+
+</Routes>
+</BrowserRouter>
+</>
   );
 }
-
-export default App;
