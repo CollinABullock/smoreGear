@@ -4,7 +4,8 @@ const productsRouter = express.Router();
 const {
     createProduct,
     getAllProducts,
-    updateProduct
+    updateProduct,
+    deleteProductsById
 } = require('../db');
 
 productsRouter.patch('/:id', async (req, res, next) => {
@@ -54,5 +55,16 @@ productsRouter.post('/', async(req, res, next) => {
         next({name, message});
     }
 })
+
+
+productsRouter.delete('/:id', async (req, res, next) => {
+    try {
+        const products = await deleteProductsById(req.params.id, req.body);
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = productsRouter;
 
