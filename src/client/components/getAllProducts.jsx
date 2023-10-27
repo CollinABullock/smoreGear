@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import React from "react-router-dom";
 
 export default function AllProducts() {
     const [products, setProducts] = useState([]);
