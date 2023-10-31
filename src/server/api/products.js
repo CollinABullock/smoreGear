@@ -5,7 +5,8 @@ const {
     createProduct,
     getAllProducts,
     updateProduct,
-    deleteProductsById
+    deleteProductsById,
+    getProductById
 } = require('../db');
 
 productsRouter.patch('/:id', async (req, res, next) => {
@@ -55,6 +56,15 @@ productsRouter.post('/', async(req, res, next) => {
         next({name, message});
     }
 })
+
+productsRouter.get('/:id', async (req, res, next) => {
+  try {
+      const products = await getProductById(req.params.id);
+      res.send(products);
+  } catch (error) {
+      next(error);
+  }
+});
 
 
 productsRouter.delete('/:id', async (req, res, next) => {

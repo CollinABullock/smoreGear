@@ -22,7 +22,11 @@ export default function AllUsers() {
     async function getAllUsers() {
       const response = await FetchAllUsers();
       console.log("second response", response);
-        setUsers(response.users);
+        try {
+          setUsers(response.users);
+        } catch (error) {
+          console.log(error);
+        }
     }
     getAllUsers();
   }, []);
