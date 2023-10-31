@@ -1,7 +1,7 @@
 import { Routes, Route, Link, useNavigate, BrowserRouter } from "react-router-dom";
-import AllUsers from './components/allUsers';
+import AllUsers from "./components/allUsers";
 import Login from './components/Login';
-import AllProducts from "./components/AllProducts";
+import AllProducts from "./components/allProducts";
 
 export default function App() {
   return (
