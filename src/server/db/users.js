@@ -72,6 +72,18 @@ const getUser = async({email, password}) => {
     }
 }
 
+async function getUserById(id) {
+  try {
+      const { rows: [ user ] } = await db.query(`
+          SELECT * FROM users
+          WHERE id = $1;
+      `, [id]);
+      return user;
+  } catch (error) {
+      throw error;
+  }
+}
+
 const getUserByEmail = async(email) => {
     try {
         const { rows: [ user ] } = await db.query(`
@@ -93,5 +105,6 @@ module.exports = {
     getUser,
     getUserByEmail,
     getAllUsers,
-    updateUser
+    updateUser,
+    getUserById
 };
