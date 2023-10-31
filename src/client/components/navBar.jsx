@@ -1,32 +1,45 @@
-import { useNavigate } from "react-router-dom";
-
-export default function NavBar() {
-  
-  // gotta store useNavigate in the navigate function so I can use said function to navigate to desired routes
-  const navigate = useNavigate();
-  
-  // gotta have a function to navigate into the characters route
-  const handleHome = () => {
-    navigate("/")
-  };
-  
-  const handleUsers = () => {
-    navigate("/users")
-  };
-
-  const handleProducts = () => {
-    navigate("/products")
-  };
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
 
+
+
+function NavBar(props) {
+  let navigate = useNavigate();
   return (
-    <>
-      
-      <div className="navBar">
-      <button className="navButton" onClick={handleHome}>Home</button>
-        <button className="navButton" onClick={handleUsers}>Users</button>
-        <button className="navButton" onClick={handleProducts}>Products</button>
-      </div>
-    </>
+    <nav>
+      {props.isLoggedIn ? (
+        <>
+
+          <Link className="links" to="/">Home</Link>
+          <Link className="links" to="/users">Users</Link>
+          <Link className="links" to="/products">For Sale!</Link>
+          <Link className="links" to="/profile">My Profile</Link>
+          <Link className="links" to="/create-post">Sell Something!</Link>
+          <button id="logout-button"
+            onClick={() => {
+              props.setIsLoggedIn(false);
+              localStorage.removeItem("token"); //Removes token from local storage when logout is clicked.
+              navigate("/")
+          }}>Logout
+          </button>
+        </>
+      ) : (
+        <>
+       
+          <Link className="links" to="/products">
+            See What's For Sale!  
+          </Link>
+          <Link className="links" to="/login">
+            Login  
+          </Link>
+          <Link className="links" to="/register">
+            Register  
+          </Link>
+        </>
+      )}
+    </nav>
   );
 }
+
+export default NavBar;
