@@ -2,35 +2,63 @@ import React, { useEffect, useState } from "react";
 
 export default function AllProducts() {
     const [products, setProducts] = useState([]);
+    console.log("at first", products);
     const [error, setError] = useState(null);
+    const [searchParams, setSearchParams] = useState("");
 
-
-useEffect(() => {
-    async function fetchAllProducts() {
-        try{
-            const response = await fetch("http://localhost:3000/api/products");
-            const result = await response.json();
-            setProducts(result);
-
-        }
-        catch(error){
-            setError(error);
-        }
+async function FetchAllProducts() {
+    try {
+        const response = await fetch ("http://localhost:3000/api/products");
+        const result = await response.json();
+        console.log(result);
+        return result
+    } catch (error) {
+        console.log(error);
     }
-    fetchAllProducts();
+}
+
+useEffect (() => {
+    async function getAllProducts() {
+        const response = await FetchAllProducts();
+        console.log("second response", response);
+        setProducts(response.products);
+    }
+    getAllProducts();
 }, []);
 
+const displayedProducts = searchParams ? products.filter((products) =>
+products.name.toLowerCase().includes(searchParams)
+) : products;
+
+console.log("displayed products", displayedProducts);
+console.log("all products", products);
+
 return (
-    <div>
-        {error ? (
-            <p>Error: {error.message}</p>
-        ) : (
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>{product.name}</li>
-                ))}
-            </ul>
-        )}
-    </div>
+<>
+<div>
+  <label>
+    Search{" "}
+    <input type="text"
+    placeholder="search"
+    onChange={(e) => setSearchParams (e.target.value.toLowerCase())}
+    />
+  </label>
+</div>
+
+{console.log("towards the end", products)}
+{!error && displayedProducts.map((products) => {
+  return (
+    <>
+   <div>
+{products.name}
+</div>
+  </>
+  )
+})}
+</>
 );
-                }
+}  
+
+
+
+                        
