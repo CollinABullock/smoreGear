@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const BASE_URL = `http://localhost:3000/api/register`;
+const BASE_URL = 'http://localhost:3000';
 
 
 function Register(props) {
@@ -32,7 +32,7 @@ function Register(props) {
 
     async function registerUser() {
         try {
-            const response = await fetch(`${BASE_URL}/users/register`, {
+            const response = await fetch(`${BASE_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
