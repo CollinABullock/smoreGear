@@ -11,7 +11,7 @@ function Home() {
       <h4>Buy and sell everything you need for the great outdoors</h4>
       <NavBar />
       <Login />
-      <img src="https://s7.bluegreenvacations.com/is/image/BGV/collection-great-outdoors-lg?$bg2-hero-lg$" className="homeIMG" alt="The Great Outdoors" />
+      <img src="src/client/assets/images/smoregearlogo.png" className="homeIMG" alt="The Great Outdoors" />
       <p>(c) 2023, Collin A. Bullock, TRavis Bergen, Andy Nunez, and Fletcher Burton</p>
       </div>
   )
