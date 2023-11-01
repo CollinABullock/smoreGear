@@ -34,6 +34,8 @@ products.name.toLowerCase().includes(searchParams)
 console.log("displayed products", displayedProducts);
 console.log("all products", products);
 
+const api = "http://localhost:3000/";
+
 return (
 <>
 <NavBar />
@@ -52,7 +54,9 @@ return (
   return (
     <>
    <div>
-{products.name}
+    <a href={`/${products.id}`}>
+{products.name} - ${products.price}
+</a>
 </div>
   </>
   )
