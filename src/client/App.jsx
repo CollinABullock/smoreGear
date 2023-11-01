@@ -3,6 +3,7 @@ import AllUsers from "./components/allUsers";
 import Login from './components/Login';
 import Register from "./components/Register";
 import AllProducts from "./components/allProducts";
+import SingleProduct from "./components/singleProduct";
 import NavBar from "./components/navBar";
 
 function Home() {
@@ -12,7 +13,7 @@ function Home() {
       <h4>Buy and sell everything you need for the great outdoors</h4>
       <NavBar />
       <img src="src/client/assets/images/smoregearlogo.png" className="homeIMG" alt="The Great Outdoors" />
-      <p>(c) 2023, Collin A. Bullock, TRavis Bergen, Andy Nunez, and Fletcher Burton</p>
+      <p>(c) 2023, Collin A. Bullock, Travis Bergen, Andy Nunez, and Fletcher Burton</p>
       </div>
   )
 }
@@ -28,6 +29,7 @@ export default function App() {
   <Route path="/users" element={<AllUsers />} />
   <Route path="/products" element={<AllProducts />} />
   <Route path="/register" element={<Register />} />
+  <Route path="/:id" element={<SingleProduct />} />
 
 </Routes>
 </BrowserRouter>
