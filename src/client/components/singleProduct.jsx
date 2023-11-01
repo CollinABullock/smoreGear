@@ -29,7 +29,7 @@ export default function SingleProduct() {
   async function getSingleProduct() {
     const response = await fetchSingleProduct(id);
     console.log("response", response);
-    setProduct(response.data.product)
+    setProduct(response);
   }
   getSingleProduct()
  }, [])
@@ -38,7 +38,9 @@ export default function SingleProduct() {
 
   return (
     <>
-    <h1>{product.name}</h1><br />
+    <h1>{product.name}</h1>
+    <h3>${product.price}</h3>
+    <p>{product.description}</p>
     <button onClick={goBack}>Go Back!</button>
     </>
   )
