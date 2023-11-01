@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NavBar from "./navBar";
 
 export default function AllProducts() {
     const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ console.log("all products", products);
 
 return (
 <>
+<NavBar />
 <div>
   <label>
     Search{" "}

@@ -1,4 +1,5 @@
 import React from "react";
+import NavBar from "./navBar";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -54,6 +55,8 @@ function Register(props) {
 
 
     return(
+        <>
+      <NavBar />
         <div id="register-container"> 
             <h1 id="registerheader">REGISTER</h1>
             <form id="registerform" onSubmit={handleSubmit}>
@@ -82,6 +85,7 @@ function Register(props) {
 
             </form>
         </div>
+        </>
     )
 }
 
