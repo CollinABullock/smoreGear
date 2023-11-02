@@ -55,7 +55,8 @@ export default function AllUsers() {
       return (
         <>
        <div>
-    {user.name}
+       <a href={`/users/${user.id}`}>
+    {user.name} </a>
   </div>
       </>
       )

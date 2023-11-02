@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from "./components/Register";
 import AllProducts from "./components/allProducts";
 import SingleProduct from "./components/singleProduct";
+import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import NavBar from "./components/navBar";
 
@@ -32,6 +33,7 @@ export default function App() {
   <Route path="/create-post" element={<CreatePost />} />
   <Route path="/register" element={<Register />} />
   <Route path="/products/:id" element={<SingleProduct />} />
+  <Route path="/users/:id" element={<SingleUser />} />
 
 </Routes>
 </BrowserRouter>
