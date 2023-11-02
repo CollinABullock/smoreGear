@@ -7,10 +7,13 @@ import React from "react";
 function NavBar(props) {
   let navigate = useNavigate();
   return (
+    <>
+    <div className="logoDiv">
+    <img src="src/client/assets/images/smoregearlogo.jpg" className="logoPic"/>
+    </div>
     <nav>
       {props.isLoggedIn ? (
-        <>
-
+        <div className="navbar">
           <Link className="links" to="/">Home</Link>
           <Link className="links" to="/users">Users</Link>
           <Link className="links" to="/products">For Sale!</Link>
@@ -23,9 +26,9 @@ function NavBar(props) {
               navigate("/")
           }}>Logout
           </button>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="navbar">
        
           <Link className="links" to="/products">
             See What's For Sale!  
@@ -36,9 +39,10 @@ function NavBar(props) {
           <Link className="links" to="/register">
             Register  
           </Link>
-        </>
+        </div>
       )}
     </nav>
+    </>
   );
 }
 

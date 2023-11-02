@@ -8,6 +8,7 @@ import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import NavBar from "./components/navBar";
 
+
 function Home() {
   return (
     <div className="homeDiv">
