@@ -6,6 +6,35 @@
   height: 100vh; 
 }
 
+@font-face {
+  font-family: 'softcore';
+  src: url('src/client/assets/casual-softcore/Casual Softcore.otf') format('opentype');
+}
+
+
+* {
+  background-color: #606c38;
+  color: #fefae0;
+  font-family: "softcore";
+}
+
+.logoPic {
+  width: 400px;
+}
+
+.logoDiv {
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  font-size: 4em;
+  justify-content: center;
+  align-items: center;
+}
+
 .App-header {
   margin-bottom: 20px;
   font-size: 24px;
@@ -13,6 +42,10 @@
 
 #comp-img{
   width: 250px;
+}
+
+.links {
+  padding: 20px;
 }
 
 /* Add more styling for other elements if needed */

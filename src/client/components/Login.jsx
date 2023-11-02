@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from './navBar';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -44,6 +45,7 @@ const Login = () => {
 
   return (
     <div>
+      <NavBar />
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
