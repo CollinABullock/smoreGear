@@ -51,7 +51,7 @@ return (
 {!error && displayedProducts.map((products) => {
   return (
     <>
-   <div>
+   <div className="allProducts">
     <a href={`/products/${products.id}`}>
 {products.name} - ${products.price}
 </a>

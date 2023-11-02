@@ -1,9 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 
-
-
-
 function NavBar(props) {
   let navigate = useNavigate();
   return (

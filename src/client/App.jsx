@@ -7,6 +7,7 @@ import SingleProduct from "./components/singleProduct";
 import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import NavBar from "./components/navBar";
+import "./style.css";
 
 
 function Home() {
