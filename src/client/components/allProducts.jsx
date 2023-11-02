@@ -54,7 +54,7 @@ return (
   return (
     <>
    <div>
-    <a href={`/${products.id}`}>
+    <a href={`/products/${products.id}`}>
 {products.name} - ${products.price}
 </a>
 </div>

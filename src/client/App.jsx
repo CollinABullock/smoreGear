@@ -31,7 +31,7 @@ export default function App() {
   <Route path="/products" element={<AllProducts />} />
   <Route path="/create-post" element={<CreatePost />} />
   <Route path="/register" element={<Register />} />
-  <Route path="/:id" element={<SingleProduct />} />
+  <Route path="/products/:id" element={<SingleProduct />} />
 
 </Routes>
 </BrowserRouter>
