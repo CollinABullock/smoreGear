@@ -43,6 +43,8 @@ export default function SingleProduct() {
     <h1>{product.name}</h1>
     <h3>${product.price}</h3>
     <p>{product.description}</p>
+    <a href="http://localhost:3000/products" class="button">Back to products!</a>
+      
     </>
   )
 }
