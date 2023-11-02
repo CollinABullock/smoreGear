@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavBar from "./navBar";
 
 export default function AllUsers() {
   const [users, setUsers] = useState([]);
@@ -40,6 +41,7 @@ export default function AllUsers() {
 
   return (
     <>
+    <NavBar />
     <div>
       <label>
         Search{" "}

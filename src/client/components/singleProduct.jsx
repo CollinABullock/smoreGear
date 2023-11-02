@@ -23,7 +23,7 @@ export default function SingleProduct() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate("/home");
+    navigate("/products");
   }
 
  useEffect(() => {
@@ -43,7 +43,7 @@ export default function SingleProduct() {
     <h1>{product.name}</h1>
     <h3>${product.price}</h3>
     <p>{product.description}</p>
-    <a href="http://localhost:3000/products" class="button">Back to products!</a>
+    <button onClick={goBack}>Back to products</button>
       
     </>
   )

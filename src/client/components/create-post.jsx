@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./navBar";
 
 
 function CreatePost(props) {
@@ -67,6 +68,7 @@ function CreatePost(props) {
 
 
     return(
+      <><NavBar />
         <div id="createpost">
             <form onSubmit={handleSubmit} id="createform">
                 <h1 id="newpost">Sell Your Gear!</h1>
@@ -115,6 +117,7 @@ function CreatePost(props) {
 
             </form>
         </div>
+        </>
     )
 }
 

@@ -23,7 +23,7 @@ export default function SingleUser() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate("/home");
+    navigate("/users");
   }
 
  useEffect(() => {
@@ -42,7 +42,7 @@ export default function SingleUser() {
     <NavBar />
     <h1>{user.name}</h1>
     <h3>{user.email}</h3>
-    <a href="http://localhost:3000/users" class="button">Back to users!</a>
+    <button onClick={goBack}>Back to users</button>
       
     </>
   )
