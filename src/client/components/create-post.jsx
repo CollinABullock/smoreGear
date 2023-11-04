@@ -4,67 +4,58 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "./navBar";
 
 
-function CreatePost(props) {
+function CreatePost() {
    const [name, setName] = useState("");
    const [description, setDescription] = useState("");
    const [price, setPrice] = useState("");
    const navigate = useNavigate();
 
    
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-   
-        try {
-            const result = await createPost(); 
+   const handleSubmit = async (e) => {
+    e.preventDefault();
 
-
-            navigate('/')
-        } catch (error) {
-            console.log(error)
-        }
-
+    try {
+        const result = await createPost(name, description, price);
+        navigate('/products/submission');
+    } catch (error) {
+        console.log(error);
     }
+}
 
 
 
 
 
 
-    async function createPost() {
-        try {
-            if(props.isLoggedIn) {
-                const token = localStorage.getItem("token");
-                const response = await fetch("http://localhost:3000/products", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        post: {
-                           name: name,
-                           description: description,
-                           price: price
-                        }
-                    })
-                });  
-                const result = await response.json()
-                console.log(result, props.items)
-                const itemsCopy = [...props.items]
-                itemsCopy.push(result.data.post)
-                props.setItems(itemsCopy)
 
-                setName("")
-                setDescription("")
-                setPrice("")
-
-                console.log(result)
-                return result;
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    async function createPost(name, description, price) {
+      try {
+          const response = await fetch("http://localhost:3000/products/post", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                  name: name,
+                  description: description,
+                  price: price
+              })
+          });
+          
+          if (response.status === 200) {
+              // The POST request was successful (status code 200 Created)
+              const result = await response.json();
+              return result;
+          } else {
+              // Handle errors or other status codes here
+              throw new Error("Failed to create a post");
+          }
+      } catch (error) {
+          console.error("Error creating a post:", error);
+          throw error;
+      }
+  }
+  
 
 
     return(

@@ -9,15 +9,6 @@ const {
     getProductById
 } = require('../db');
 
-productsRouter.patch('/:id', async (req, res, next) => {
-  try {
-      const updatedProduct = await updateProduct(req.params.id, req.body);
-      res.send(updatedProduct)
-  } catch (error) {
-      console.log(error);
-  }
-});
-
 productsRouter.get('/', async( req, res, next) => {
     try {
         const products = await getAllProducts();
@@ -30,8 +21,17 @@ productsRouter.get('/', async( req, res, next) => {
     }
 });
 
+productsRouter.patch('/:id', async (req, res, next) => {
+    try {
+        const updatedProduct = await updateProduct(req.params.id, req.body);
+        res.send(updatedProduct)
+    } catch (error) {
+        console.log(error);
+    }
+  });
 
-productsRouter.post('/', async(req, res, next) => {
+
+productsRouter.post('/post', async(req, res, next) => {
    const {name, description, price = ""} = req.body;
 
    const postProducts = {};
