@@ -33,6 +33,10 @@ const Login = () => {
         }
         setEmail('');
         setPassword('');
+
+        console.log(response.status, response.headers, response.statusText);
+        console.log(await response.text());
+        
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
     }

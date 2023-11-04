@@ -19,12 +19,12 @@ function Register(props) {
             const result = await registerUser(); // Passing our async function in from below.
             console.log(result.data)
 
-            localStorage.setItem("token", result.data.token) // Storing only key-value pair for token.
-            props.setIsLoggedIn(true)  // Telling program login is true.
+            // localStorage.setItem("token", result.data.token) // Storing only key-value pair for token.
+            // props.setIsLoggedIn(true)  // Telling program login is true.
 
             navigate('/products')
         } catch (error) {
-            console.log(error)
+            console.log("handle submit error", error)
         }
 
     }
@@ -47,7 +47,7 @@ function Register(props) {
             const result = await response.json()
             return result;
         } catch (error) {
-            console.log(error)
+            console.log("registerUser error", error)
         }
     }
 
@@ -90,7 +90,7 @@ function Register(props) {
                         }}
                     />
                 </label><br />
-                
+
                 <button id="registerbutton"type="submit">Submit</button>
 
             </form>
