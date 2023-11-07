@@ -17,9 +17,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        S'More Gear (T Bergin, J Browning, C Bullock, A Nunez)
-      </Link>{' '}
+        S'More Gear (T Bergin, J Browning, F Burton, C Bullock, A Nunez)
+      {' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -75,6 +74,9 @@ const Login = () => {
     e.preventDefault();
     login();
   };
+
+  console.log("email:", email);
+  console.log("password:", password);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -145,6 +147,7 @@ const Login = () => {
               >
                 Sign In
               </Button>
+              <p>{message}</p>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
