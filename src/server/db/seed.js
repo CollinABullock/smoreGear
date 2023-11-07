@@ -98,6 +98,7 @@ const createTables = async () => {
           name VARCHAR(255) UNIQUE NOT NULL,
           description TEXT NOT NULL,
           price INTEGER NOT NULL,
+          category VARCHAR(255) UNIQUE NOT NULL,
           user_id INTEGER REFERENCES users(id)
           );
           `);
