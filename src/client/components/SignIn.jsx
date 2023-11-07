@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,14 +30,50 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const login = async() => {
+    try {
+        const response = await fetch('http://localhost:3000/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            }, 
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+        const result = await response.json();
+        setMessage(result.message);
+        if(!response.ok) {
+          throw(result)
+        }
+        setEmail('');
+        setPassword('');
+
+        console.log(response.status, response.headers, response.statusText);
+        console.log(await response.text());
+
+    } catch (err) {
+        console.error(`${err.name}: ${err.message}`);
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login();
   };
 
   return (
@@ -76,6 +112,7 @@ export default function Login() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
+              onChange={handleEmailChange}
                 margin="normal"
                 required
                 fullWidth
@@ -86,6 +123,7 @@ export default function Login() {
                 autoFocus
               />
               <TextField
+              onChange={handlePasswordChange}
                 margin="normal"
                 required
                 fullWidth
@@ -114,7 +152,7 @@ export default function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -126,4 +164,6 @@ export default function Login() {
       </Grid>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;
