@@ -40,7 +40,7 @@ async function updateUser(id, fields = {}) {
   }
 }
 
-const createUser = async({ name='first last', email, password }) => {
+const createUser = async({ name, email, password }) => {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     try {
         const { rows: [user ] } = await db.query(`

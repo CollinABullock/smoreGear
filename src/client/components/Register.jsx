@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
+const BASE_URL = 'http://localhost:3000';
+
+
 function Register(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -19,12 +22,12 @@ function Register(props) {
             const result = await registerUser(); // Passing our async function in from below.
             console.log(result.data)
 
-            // localStorage.setItem("token", result.data.token) // Storing only key-value pair for token.
-            // props.setIsLoggedIn(true)  // Telling program login is true.
+            localStorage.setItem("token", result.data.token) // Storing only key-value pair for token.
+            props.setIsLoggedIn(true)  // Telling program login is true.
 
             navigate('/products')
         } catch (error) {
-            console.log("handle submit error", error)
+            console.log(error)
         }
 
     }
@@ -47,7 +50,7 @@ function Register(props) {
             const result = await response.json()
             return result;
         } catch (error) {
-            console.log("registerUser error", error)
+            console.log(error)
         }
     }
 
@@ -78,7 +81,7 @@ function Register(props) {
                             setEmail(e.target.value);
                         }}
                     />
-                </label><br />
+                </label>
 
                 <label className="labels">Password:
                     <input
@@ -89,8 +92,7 @@ function Register(props) {
                             setPassword(e.target.value);
                         }}
                     />
-                </label><br />
-
+                </label>
                 <button id="registerbutton"type="submit">Submit</button>
 
             </form>

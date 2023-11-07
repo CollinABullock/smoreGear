@@ -73,8 +73,8 @@ const products = [
 const dropTables = async () => {
   try {
     await db.query(`
-        DROP TABLE IF EXISTS users;
-        DROP TABLE IF EXISTS products;
+    DROP TABLE IF EXISTS products;    
+    DROP TABLE IF EXISTS users; 
         `);
   } catch (err) {
     throw err;
@@ -97,7 +97,8 @@ const createTables = async () => {
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) UNIQUE NOT NULL,
           description TEXT NOT NULL,
-          price INTEGER NOT NULL 
+          price INTEGER NOT NULL,
+          user_id INTEGER REFERENCES users(id)
           );
           `);
     console.log("Finished building tables!");
@@ -129,6 +130,7 @@ const insertProducts = async () => {
         name: product.name,
         description: product.description,
         price: product.price,
+        user_id: users.id
       });
     }
     console.log("Seed data inserted successfully.");

@@ -1,11 +1,11 @@
 const db = require('./client')
 
-const createProduct = async({ name, description, price }) => {
+const createProduct = async({ name, description, price, user_id }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price)
-        VALUES($1, $2, $3)
-        RETURNING *`, [name, description, price]);
+        INSERT INTO products(name, description, price, user_id)
+        VALUES($1, $2, $3, $4)
+        RETURNING *`, [name, description, price, user_id]);
 
         return product;
     } catch (err) {
