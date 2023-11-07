@@ -1,4 +1,6 @@
 const db = require('./client')
+// const util = require('util');
+
 
 const createProduct = async({ name, description, price, user_id }) => {
     try {
@@ -76,6 +78,19 @@ async function getAllProducts() {
     }
   }
 
+  async function getProductByCategory(productId){
+    try {
+      const {rows: [ product ]} = await db.query(`
+        SELECT category FROM products
+        WHERE category = $3
+      `, [productId]);
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+
   async function deleteProductsById(productsId) {
     try {
         const { rows: [products] } = await db.query(`
@@ -105,6 +120,7 @@ module.exports = {
     createProduct,
     updateProduct,
     getAllProducts,
+    getProductByCategory,
     deleteProductsById,
     getProductById
 };
