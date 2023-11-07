@@ -7,6 +7,7 @@ import SingleProduct from "./components/singleProduct";
 import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import NavBar from "./components/navBar";
+import ShoppingCart from "./components/shoppingcart";
 
 function Home() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
   <Route path="/register" element={<Register />} />
   <Route path="/products/:id" element={<SingleProduct />} />
   <Route path="/users/:id" element={<SingleUser />} />
+  <Route path="/shoppingcart" element={<ShoppingCart />} />
 
 </Routes>
 </BrowserRouter>
