@@ -11,11 +11,6 @@
   src: url('src/client/assets/casual-softcore/Casual Softcore.otf') format('opentype');
 }
 
-* {
-  background-color: #606c38;
-  color: #fefae0;
-  font-family: "softcore";
-}
 
 .logoPic {
   width: 400px;
