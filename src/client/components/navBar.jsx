@@ -26,7 +26,13 @@ function NavBar(props) {
           </button>
         </div>
       ) : (
+
+        <>
         <div className="navbar">
+          <Link className="links" to="/">
+            Home
+            </Link>
+        
        
           <Link className="links" to="/products">
             See What's For Sale!  
@@ -37,9 +43,13 @@ function NavBar(props) {
           <Link className="links" to="/register">
             Register  
           </Link>
+
+          <Link className="links" to="/shoppingcart">
+            ShoppingCart
+          </Link>
+        </>
         </div>
       )}
-    </nav>
     </>
   );
 }

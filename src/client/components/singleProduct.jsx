@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
+import ShoppingCart from "./shoppingcart";
 
 async function fetchSingleProduct(id) {
   try {
@@ -44,6 +45,7 @@ export default function SingleProduct() {
     <h3>${product.price}</h3>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button>
+    <button onClick={ShoppingCart} >Add to shopping Cart </button>
       
     </>
   )
