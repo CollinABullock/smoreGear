@@ -23,11 +23,6 @@ function CreatePost() {
 }
 
 
-
-
-
-
-
     async function createPost(name, description, price) {
       try {
           const response = await fetch("http://localhost:3000/api/products/post", {

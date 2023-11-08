@@ -43,6 +43,7 @@ export default function SingleProduct() {
     <NavBar />
     <h1>{product.name}</h1>
     <h3>${product.price}</h3>
+    <p>Sold by {product.user_id}</p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button>
     <button onClick={ShoppingCart} >Add to shopping Cart </button>

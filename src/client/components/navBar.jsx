@@ -6,7 +6,6 @@ function NavBar(props) {
   return (
     <>
       <div className="logoDiv">
-        <img src="/src/client/assets/images/smoregearlogo.jpg" className="logoPic" alt="SmoreGear Logo" />
       </div>
       <h1>Buy and sell everything you need for the great outdoors!</h1>
       <nav>
