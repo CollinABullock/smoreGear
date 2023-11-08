@@ -92,6 +92,7 @@ const handlePriceChange = (e) => {
 
   return (
     <>
+    <NavBar />
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -160,7 +161,6 @@ const handlePriceChange = (e) => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-      <NavBar />
     </ThemeProvider>
     </>
   );

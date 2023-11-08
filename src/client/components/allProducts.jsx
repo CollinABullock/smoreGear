@@ -37,7 +37,7 @@ console.log("all products", products);
 return (
 <>
 <NavBar />
-<div>
+<div className="searchBar">
   <label>
     Search{" "}
     <input type="text"

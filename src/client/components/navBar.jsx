@@ -5,10 +5,9 @@ function NavBar(props) {
   let navigate = useNavigate();
   return (
     <>
-      <div className="logoDiv">
-      </div>
+    <div className="slogan">
       <h1>Buy and sell everything you need for the great outdoors!</h1>
-      <nav>
+      </div>
         {props.isLoggedIn ? (
           <div className="navbar">
             <Link className="links" to="/">Home</Link>
@@ -28,14 +27,13 @@ function NavBar(props) {
           </div>
         ) : (
           <div className="navbar">
-            <Link className="links" to="/">Home</Link>
             <Link className="links" to="/products">See What's For Sale!</Link>
             <Link className="links" to="/login">Login</Link>
             <Link className="links" to="/register">Register</Link>
             <Link className="links" to="/shoppingcart">ShoppingCart</Link>
           </div>
         )}
-      </nav>
+
     </>
   );
 }

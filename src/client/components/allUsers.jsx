@@ -42,7 +42,7 @@ export default function AllUsers() {
   return (
     <>
     <NavBar />
-    <div>
+    <div className="searchBar">
       <label>
         Search{" "}
         <input type="text"
