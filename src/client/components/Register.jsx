@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import "./Register.css";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./navBar";
 
 
 const Register = () => {
@@ -23,7 +24,7 @@ const Register = () => {
       e.preventDefault();
   
       try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://localhost:3000/api/users/register', {
           method: 'POST',
           headers: {
             
@@ -48,6 +49,8 @@ const Register = () => {
     };
   
     return (
+      <>
+      <NavBar />
       <div className="register-form">
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
@@ -84,6 +87,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
       </div>
+      </>
     );
   };
   

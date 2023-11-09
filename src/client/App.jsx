@@ -25,10 +25,10 @@ export default function App() {
     <BrowserRouter>
 <Routes>
   <Route path="/" element={<Home />} />
-  <Route path="/api/users/login" element={<Login />} />
+  <Route path="/login" element={<Login />} />
   <Route path="/users" element={<AllUsers />} />
   <Route path="/products" element={<AllProducts />} />
-  <Route path="/api/users/register" element={<Register />} />
+  <Route path="/register" element={<Register />} />
   <Route path="/:id" element={<SingleProduct />} />
 
 </Routes>
