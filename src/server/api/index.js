@@ -7,17 +7,7 @@ const client = require('../db/client');
 const volleyball = require('volleyball')
 apiRouter.use(volleyball)
 
-apiRouter.post('/', async (req, res, next) => {
-  try {
-    const uptime = process.uptime();
-    const {rows: [dbConnection]} = await client.query('SELECT NOW();');
-    const currentTime = new Date();
-    const lastRestart = new Intl.DateTimeFormat('en', {timeStyle: 'long', dateStyle: 'long', timeZone: "America/Los_Angeles"}).format(currentTime - (uptime * 1000));
-    res.send({message: 'healthy', uptime, dbConnection, currentTime, lastRestart});
-  } catch (err) {
-    next(err);
-  }
-});
+
 // TO BE COMPLETED - set `req.user` if possible, using token sent in the request header
 apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
