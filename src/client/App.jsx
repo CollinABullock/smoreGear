@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import AllProducts from "./components/allProducts";
 import SingleProduct from "./components/singleProduct";
 import SingleUser from "./components/singleUser";
-import CreatePost from "./components/create-post2";
+import CreatePost from "./components/create-post";
 import Submission from "./components/submission";
 import Profile from "./components/profile";
 import Login from "./components/Login";
