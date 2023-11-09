@@ -23,7 +23,7 @@ const Register = () => {
       e.preventDefault();
   
       try {
-        const response = await fetch('http://localhost:3000/api/users/register', {
+        const response = await fetch('http://localhost:3000/register', {
           method: 'POST',
           headers: {
             
