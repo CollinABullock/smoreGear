@@ -11,6 +11,8 @@ const Register = () => {
       email: '',
       password: ''
     });
+
+    const navigate = useNavigate();
   
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -37,6 +39,7 @@ const Register = () => {
         console.log(data)
         if (response.ok) {
           console.log('Registration successful!', data);
+          navigate('/products');
           // Handle successful registration, e.g., redirect to login page
         } else {
           console.error('Registration failed:', data.message);
