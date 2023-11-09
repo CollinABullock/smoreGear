@@ -93,7 +93,7 @@ usersRouter.post('/register', async(req, res, next) => {
     }
 })
 
-usersRouter.get('user/:id', async (req, res, next) => {
+usersRouter.get('/:id', async (req, res, next) => {
     try {
         const user = await getUserById(req.params.id);
         res.send(user);
