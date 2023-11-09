@@ -93,7 +93,7 @@ usersRouter.post('/register', async(req, res, next) => {
     }
 })
 
-usersRouter.get('/:id', async (req, res, next) => {
+usersRouter.get('user/:id', async (req, res, next) => {
     try {
         const user = await getUserById(req.params.id);
         res.send(user);
@@ -102,7 +102,7 @@ usersRouter.get('/:id', async (req, res, next) => {
     }
 });
 
-usersRouter.patch('/:id', async (req, res, next) => {
+usersRouter.patch('guest/:id', async (req, res, next) => {
     try {
         const updatedUsers = await updateUser(req.params.id, req.body);
         res.send(updatedUsers)

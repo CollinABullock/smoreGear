@@ -2,89 +2,172 @@ import React, { useState } from "react";
 // import "./Register.css";
 import { useNavigate } from "react-router-dom";
 
-// const COHORT_NAME = "2306-FTB-ET-WEB-AM";
-// const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-function Register(props) {
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const navigate = useNavigate();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const result = await registerUser();
-            localStorage.setItem("token", result.data.token);
-            props.setIsLoggedIn(true);
-            navigate("/");
-        } catch (error) {
-            console.log(error);
-        }
+const Register = () => {
+    
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      password: ''
+    });
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
     };
-
-    async function registerUser() {
-        try {
-            const response = await fetch('http://localhost:3000/register', {
-                method: "POST",
-                headers: {
-                  'Authorization': Bearer,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    user: {
-                        name: name,
-                        password: password,
-                        email: email, // Include email in the request body
-                    },
-                }),
-            });
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            console.log(error);
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch('http://localhost:3000/api/users/register', {
+          method: 'POST',
+          headers: {
+            
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+  
+        const data = await response.json();
+        console.log(data)
+        if (response.ok) {
+          console.log('Registration successful!', data);
+          // Handle successful registration, e.g., redirect to login page
+        } else {
+          console.error('Registration failed:', data.message);
+          // Handle registration error, e.g., display error message to the user
         }
-    }
-
+      } catch (error) {
+        console.error('Error during registration:', error.message);
+      }
+      
+    };
+  
     return (
-        <div id="register-container">
-            <h1 id="registerheader">REGISTER</h1>
-            <form id="registerform" onSubmit={handleSubmit}>
-                <label className="labels">
-                    Username:
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-
-                <label className="labels">
-                    Email:
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </label>
-
-                <label className="labels">
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </label>
-                <button id="registerbutton" type="submit">
-                    Submit
-                </button>
-            </form>
-        </div>
+      <div className="register-form">
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <button type="submit">Register</button>
+        </form>
+      </div>
     );
-}
+  };
+  
+  export default Register;
+// function Register(props) {
+//     const [name, setName] = useState("");
+//     const [password, setPassword] = useState("");
+//     const [email, setEmail] = useState("");
+//     const navigate = useNavigate();
 
-export default Register;
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         try {
+//             const result = await registerUser();
+//             localStorage.setItem("token", result.data.token);
+//             props.setIsLoggedIn(true);
+//             navigate("/");
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     };
+
+//     async function registerUser() {
+//         try {
+//             const response = await fetch('http://localhost:3000/api/users/register', {
+//                 method: "POST",
+//                 headers: {
+//                   'Authorization': Bearer,
+//                     "Content-Type": "application/json",
+//                 },
+//                 body: JSON.stringify({
+//                     user: {
+//                         name: name,
+//                         password: password,
+//                         email: email, // Include email in the request body
+//                     },
+//                 }),
+//             });
+//             const result = await response.json();
+//             return result;
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+
+//     return (
+//         <div id="register-container">
+//             <h1 id="registerheader">REGISTER</h1>
+//             <form id="registerform" onSubmit={handleSubmit}>
+//                 <label className="labels">
+//                    Name:
+//                     <input
+//                         type="text"
+//                         value={name}
+//                         onChange={(e) => setName(e.target.value)}
+//                     />
+//                 </label>
+
+//                 <label className="labels">
+//                     Email:
+//                     <input
+//                         type="email"
+//                         value={email}
+//                         onChange={(e) => setEmail(e.target.value)}
+//                     />
+//                 </label>
+
+//                 <label className="labels">
+//                     Password:
+//                     <input
+//                         type="password"
+//                         value={password}
+//                         onChange={(e) => setPassword(e.target.value)}
+//                     />
+//                 </label>
+//                 <button id="registerbutton" type="submit">
+//                     Submit
+//                 </button>
+//             </form>
+//         </div>
+//     );
+// }
+
+// export default Register;
 
 
 
