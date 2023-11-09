@@ -34,12 +34,10 @@ products.name.toLowerCase().includes(searchParams)
 console.log("displayed products", displayedProducts);
 console.log("all products", products);
 
-const api = "http://localhost:3000/";
-
 return (
 <>
 <NavBar />
-<div>
+<div className="searchBar">
   <label>
     Search{" "}
     <input type="text"
@@ -53,8 +51,8 @@ return (
 {!error && displayedProducts.map((products) => {
   return (
     <>
-   <div>
-    <a href={`/${products.id}`}>
+   <div className="allProducts">
+    <a href={`/products/${products.id}`}>
 {products.name} - ${products.price}
 </a>
 </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
+import ShoppingCart from "./shoppingcart";
 
 async function fetchSingleProduct(id) {
   try {
@@ -23,7 +24,7 @@ export default function SingleProduct() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate("/home");
+    navigate("/products");
   }
 
  useEffect(() => {
@@ -42,7 +43,11 @@ export default function SingleProduct() {
     <NavBar />
     <h1>{product.name}</h1>
     <h3>${product.price}</h3>
+    <p>Sold by {product.user_id}</p>
     <p>{product.description}</p>
+    <button onClick={goBack}>Back to products</button><br />
+    <button onClick={ShoppingCart} >Add to shopping Cart </button>
+      
     </>
   )
 }

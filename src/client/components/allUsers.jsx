@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavBar from "./navBar";
 
 export default function AllUsers() {
   const [users, setUsers] = useState([]);
@@ -40,7 +41,8 @@ export default function AllUsers() {
 
   return (
     <>
-    <div>
+    <NavBar />
+    <div className="searchBar">
       <label>
         Search{" "}
         <input type="text"
@@ -55,7 +57,8 @@ export default function AllUsers() {
       return (
         <>
        <div>
-    {user.name}
+       <a href={`/users/${user.id}`}>
+    {user.name} </a>
   </div>
       </>
       )

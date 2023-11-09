@@ -1,13 +1,13 @@
 const db = require('./client')
-const bcrypt = require('bcrypt');
-const SALT_COUNT = 10;
+// const util = require('util');
 
-const createProduct = async({ name, description, price }) => {
+
+const createProduct = async({ name, description, price, user_id }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price)
-        VALUES($1, $2, $3)
-        RETURNING *`, [name, description, price]);
+        INSERT INTO products(name, description, price, user_id)
+        VALUES($1, $2, $3, $4)
+        RETURNING *`, [name, description, price, user_id]);
 
         return product;
     } catch (err) {
@@ -78,6 +78,19 @@ async function getAllProducts() {
     }
   }
 
+  async function getProductByCategory(productId){
+    try {
+      const {rows: [ product ]} = await db.query(`
+        SELECT category FROM products
+        WHERE category = $3
+      `, [productId]);
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+
   async function deleteProductsById(productsId) {
     try {
         const { rows: [products] } = await db.query(`
@@ -107,6 +120,8 @@ module.exports = {
     createProduct,
     updateProduct,
     getAllProducts,
+    getProductByCategory,
     deleteProductsById,
     getProductById
 };
+
