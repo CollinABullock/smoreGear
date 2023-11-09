@@ -13,7 +13,7 @@ function NavBar(props) {
             <Link className="links" to="/">Home</Link>
             <Link className="links" to="/users">Users</Link>
             <Link className="links" to="/products">For Sale!</Link>
-            <Link className="links" to="/profile">My Profile</Link>
+            <Link className="links" to="/users/profile">My Profile</Link>
             <Link className="links" to="/products/create-post">Sell Something!</Link>
             <button id="logout-button"
               onClick={() => {
@@ -28,9 +28,9 @@ function NavBar(props) {
         ) : (
           <div className="navbar">
             <Link className="links" to="/products">See What's For Sale!</Link>
-            <Link className="links" to="/login">Login</Link>
-            <Link className="links" to="/register">Register</Link>
-            <Link className="links" to="/shoppingcart">ShoppingCart</Link>
+            <Link className="links" to="/users/login">Login</Link>
+            <Link className="links" to="/users/register">Register</Link>
+            <Link className="links" to="/products/shoppingcart">ShoppingCart</Link>
           </div>
         )}
 

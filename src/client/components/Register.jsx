@@ -22,7 +22,7 @@ function Register(props) {
             const result = await registerUser(); // Passing our async function in from below.
             console.log(result.data)
 
-            localStorage.setItem("token", result.data.token) // Storing only key-value pair for token.
+            localStorage.setItem("token", result.token) // Storing only key-value pair for token.
             props.setIsLoggedIn(true)  // Telling program login is true.
 
             navigate('/products')

@@ -34,16 +34,15 @@ export default function App() {
     <BrowserRouter>
 <Routes>
   <Route path="/" element={<Login />} />
-  <Route path="/profile" element={<Profile />} />
-  <Route path="/login" element={<Login />} />
+  <Route path="/users/profile" element={<Profile />} />
+  <Route path="/users/login" element={<Login />} />
   <Route path="/users" element={<AllUsers />} />
   <Route path="/products" element={<AllProducts />} />
   <Route path="/products/create-post" element={<CreatePost />} />
-  <Route path="/register" element={<Register />} />
+  <Route path="/users/register" element={<Register />} />
   <Route path="/products/:id" element={<SingleProduct />} />
   <Route path="/users/:id" element={<SingleUser />} />
-
-  <Route path="/shoppingcart" element={<ShoppingCart />} />
+  <Route path="/products/shoppingcart" element={<ShoppingCart />} />
   <Route path="/products/submission" element={<Submission />} />
 
 

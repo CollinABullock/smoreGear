@@ -41,7 +41,8 @@ body {
   color: antiquewhite;
   margin-bottom: 20px;
 }
-.navbar:link {
+
+link {
   color: whitesmoke;
 }
 
