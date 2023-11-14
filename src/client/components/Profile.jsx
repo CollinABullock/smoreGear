@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Profile.css";
-import Delete from "./Delete";
 
 
 const BASE_URL = `http://localhost:3000`;
