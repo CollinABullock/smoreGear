@@ -27,56 +27,66 @@ function Copyright(props) {
     );
   }
 
-const defaultTheme = createTheme();
+  const defaultTheme = createTheme();
 
-
-const Register = () => {
-    
-    const [formData, setFormData] = useState({
-      Name: '',
-      email: '',
-      password: ''
-    });
-
+  export default function register() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
   
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    };
   
     const handleSubmit = async (e) => {
-      e.preventDefault();
+     e.preventDefault();
   
-      try {
-        const response = await fetch('http://localhost:3000/api/users/register', {
-          method: 'POST',
-          headers: {
-            
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
+     try {
+         const result = await registerUser(name, email, password);
+         navigate('/');
+     } catch (error) {
+         console.log(error);
+     }
+  }
   
-        const data = await response.json();
-        console.log(data)
-        if (response.ok) {
-          console.log('Registration successful!', data);
-          navigate('/products');
-          // Handle successful registration, e.g., redirect to login page
-        } else {
-          console.error('Registration failed:', data.message);
-          // Handle registration error, e.g., display error message to the user
-        }
-      } catch (error) {
-        console.error('Error during registration:', error.message);
-      }
-      
-    };
+     async function registerUser(name, email, password) {
+       try {
+           const response = await fetch("http://localhost:3000/api/users/register", {
+               method: "POST",
+               headers: {
+                   "Content-Type": "application/json",
+               },
+               body: JSON.stringify({
+                   name: name,
+                   email: email,
+                   password: password
+               })
+           });
+           
+           if (response.status === 200) {
+               // The POST request was successful (status code 200 Created)
+               const result = await response.json();
+               return result;
+           } else {
+               // Handle errors or other status codes here
+               throw new Error("Failed to create a post");
+           }
+       } catch (error) {
+           console.error("Error creating a post:", error);
+           throw error;
+       }
+   }
   
+   
+   const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };  
     return (
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
@@ -97,29 +107,17 @@ const Register = () => {
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
-                  <Grid item >
+                <Grid item xs={12}>
                     <TextField
                       autoComplete="given-name"
-                      name="firstName"
+                      name="name"
                       required
                       fullWidth
-                      id="firstName"
-                      label="First Name"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
+                      id="name"
+                      label="Name"
+                      value={name}
+                      onChange={handleNameChange}
                       autoFocus
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="family-name"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -130,8 +128,8 @@ const Register = () => {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
+                      value={email}
+                      onChange={handleEmailChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -143,8 +141,8 @@ const Register = () => {
                       type="password"
                       id="password"
                       autoComplete="new-password"
-                      value={formData.password}
-                      onChange={handleInputChange}
+                      value={password}
+                      onChange={handlePasswordChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -164,7 +162,7 @@ const Register = () => {
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <Link href="http://localhost:3000/users/login" variant="body2">
+                    <Link href="http://localhost:3000/" variant="body2">
                       Already have an account? Sign in
                     </Link>
                   </Grid>
@@ -177,4 +175,4 @@ const Register = () => {
       );
     };
   
-  export default Register;
+

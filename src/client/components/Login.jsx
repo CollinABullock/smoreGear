@@ -64,7 +64,7 @@ const Login = () => {
         }
         setEmail('');
         setPassword('');
-        navigate("/products");
+        // navigate("/products");
 
         console.log(response.status, response.headers, response.statusText);
         console.log(await response.text());
