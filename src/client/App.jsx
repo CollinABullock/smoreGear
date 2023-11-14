@@ -7,7 +7,7 @@ import SingleProduct from "./components/singleProduct";
 import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import Submission from "./components/submission";
-import Profile from "./components/profile";
+import Profile from "./components/Profile";
 import Login from "./components/Login";
 import NavBar from "./components/navBar";
 import ShoppingCart from "./components/shoppingcart";
