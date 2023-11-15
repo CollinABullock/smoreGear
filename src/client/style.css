@@ -30,7 +30,7 @@ body {
   background-color: #780000;
 }
 
-.navbar {
+nav {
   display: flex;
   flex-direction: row;
   font-size: 2em;

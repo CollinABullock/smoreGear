@@ -28,7 +28,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -51,12 +51,11 @@ const Login = () => {
 
     try {
       const result = await login(); // Passing our async function in from below.
-      console.log(result);
     
-      // props.setIsLoggedIn(true);
-      // props.setLoggedInUser(email); // Telling program login is true.
+      props.setIsLoggedIn(true);
+      props.setLoggedInUser(email); // Telling program login is true.
 
-      navigate('/');
+      navigate('/products');
     } catch (error) {
       console.log(error);
     }
@@ -64,45 +63,41 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-  
-const result = await response.json();
-console.log(result.token);
+        const response = await fetch('http://localhost:3000/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                password,
+            }),
+        });
 
-localStorage.setItem("token", result.token); // Fetching only key-value pair for token for the login.
-
-      // Log information about the response before consuming the body
-      console.log(response.status, response.headers, response.statusText, response.token);
-  
-      // Check if the response is in JSON format
-      if (response.headers.get('content-type')?.includes('application/json')) {
-        const result = await response.json();
-        setMessage(result.message);
-  
+        // Check if the response is in JSON format
         if (!response.ok) {
-          throw result;
+            const result = await response.json();
+            throw result;
         }
-      } else {
-        // Handle non-JSON response (e.g., plain text error message)
-        const resultText = await response.text();
-        console.error('Non-JSON response:', resultText);
-      }
-  
-      setEmail('');
-      setPassword('');
+
+        const result = await response.json();
+        console.log(result.token);
+
+        localStorage.setItem("token", result.token);
+
+        // Log information about the response before consuming the body
+        console.log(response.status, response.headers, response.statusText, result.token);
+
+        setMessage(result.message);
+
+        setEmail('');
+        setPassword('');
     } catch (err) {
-      console.error(`${err.name}: ${err.message}`);
+        console.error(`${err.name}: ${err.message}`);
     }
-  };
+};
+
+
   
 
   console.log("email:", email);
@@ -171,7 +166,6 @@ localStorage.setItem("token", result.token); // Fetching only key-value pair for
               />
               <Button
                 type="submit"
-                onChange={handleSubmit}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
