@@ -26,14 +26,14 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  console.log(message);
 
   const navigate = useNavigate();
 
@@ -45,39 +45,65 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+
     try {
-        const response = await fetch('http://localhost:3000/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            }, 
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
+      const result = await login(); // Passing our async function in from below.
+      console.log(result);
+    
+      // props.setIsLoggedIn(true);
+      // props.setLoggedInUser(email); // Telling program login is true.
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const login = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+  
+const result = await response.json();
+console.log(result.token);
+
+localStorage.setItem("token", result.token); // Fetching only key-value pair for token for the login.
+
+      // Log information about the response before consuming the body
+      console.log(response.status, response.headers, response.statusText, response.token);
+  
+      // Check if the response is in JSON format
+      if (response.headers.get('content-type')?.includes('application/json')) {
         const result = await response.json();
         setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
+  
+        if (!response.ok) {
+          throw result;
         }
-        setEmail('');
-        setPassword('');
-        // navigate("/products");
-
-        console.log(response.status, response.headers, response.statusText);
-        console.log(await response.text());
-
+      } else {
+        // Handle non-JSON response (e.g., plain text error message)
+        const resultText = await response.text();
+        console.error('Non-JSON response:', resultText);
+      }
+  
+      setEmail('');
+      setPassword('');
     } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+      console.error(`${err.name}: ${err.message}`);
     }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login();
   };
+  
 
   console.log("email:", email);
   console.log("password:", password);
@@ -145,6 +171,7 @@ const Login = () => {
               />
               <Button
                 type="submit"
+                onChange={handleSubmit}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -153,11 +180,6 @@ const Login = () => {
               </Button>
               <p>{message}</p>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <Link href="/users/register" variant="body2">
                     {"Don't have an account? Sign Up"}
