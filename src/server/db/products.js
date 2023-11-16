@@ -1,14 +1,15 @@
+const { Category } = require('@mui/icons-material');
 const db = require('./client')
 // const util = require('util');
 // const insertProducts = require('./products');
 
 
-const createProduct = async({ name, description, price, user_id, image_path }) => {
+const createProduct = async({ name, description, price, userID, category, image_path }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price, user_id, image_path)
-        VALUES($1, $2, $3, $4, $5 )
-        RETURNING *`, [name, description, price, user_id, image_path]);
+        INSERT INTO products(name, description, price, userID, category, image_path)
+        VALUES($1, $2, $3, $4, $5, $6 )
+        RETURNING *`, [name, description, price, userID, category, image_path]);
 
 
         return product;
@@ -71,7 +72,7 @@ async function getAllProducts() {
     try {
       const { rows } = await db.query(`
 
-        SELECT id, name, description, price, image_path, user_id
+        SELECT id, name, description, price, image_path, userID
 
         FROM products;
       `);

@@ -5,6 +5,7 @@ import React from "react";
 function NavBar(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState("");
+  console.log(isLoggedIn);
   
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,16 +21,15 @@ function NavBar(props) {
       <h1>Buy and sell everything you need for the great outdoors!</h1>
       </div>
       <nav>
-      {props.isLoggedIn ? (
+      {isLoggedIn ? (
         <>
          <div className="navbar" >
-          <Link className="links" to="/">Home</Link>
-          <Link className="links" to="/profile">My Profile</Link>
+          <Link className="links" to="/users/profile">My Profile</Link>
           <Link className="links" to="/createpost">Create Post</Link>
           <Link className="links" to="/allposts">All Posts</Link>
           <button id="logout-button"
             onClick={() => {
-              props.setIsLoggedIn(false);
+              setIsLoggedIn(false);
               localStorage.removeItem("token"); //Removes token from local storage when logout is clicked.
               navigate("/")
           }}>Logout

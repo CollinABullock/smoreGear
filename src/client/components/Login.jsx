@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { PersonPinSharp } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -29,6 +30,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Login = (props) => {
+  console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -49,13 +51,16 @@ const Login = (props) => {
     e.preventDefault();
     console.log(email, password);
 
+    navigate('/products');
+
     try {
       const result = await login(); // Passing our async function in from below.
     
       props.setIsLoggedIn(true);
       props.setLoggedInUser(email); // Telling program login is true.
 
-      navigate('/products');
+      
+
     } catch (error) {
       console.log(error);
     }
