@@ -10,7 +10,6 @@ body {
   font-family: "softcore";
   background-color: #780000;
   color: antiquewhite;
-  text-align: center;
 }
 
 @font-face {
@@ -31,7 +30,7 @@ body {
   background-color: #780000;
 }
 
-.navbar {
+nav {
   display: flex;
   flex-direction: row;
   font-size: 2em;

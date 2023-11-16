@@ -43,6 +43,7 @@ const products = [
     description: "old and used",
     price: 20,
     image_path: 'https://ik.imagekit.io/7zon7c8tt/TB100NXT_FadeDeepBlueWhite_TOP.webp?updatedAt=1700151670835',
+    category: "water",
   },
 
   {
@@ -51,6 +52,7 @@ const products = [
     description: "Family size. Fits up to 4 people",
     price: 300,
     image_path: 'https://ik.imagekit.io/7zon7c8tt/shopping.webp?updatedAt=1700151792457',
+    category: "camping",
   },
   {
     userID: 3,
@@ -58,6 +60,7 @@ const products = [
     description: "Potent bear spray to keep them away",
     price: 50,
     image_path: 'https://ik.imagekit.io/7zon7c8tt/61e485coETL._AC_UF1000,1000_QL80_.jpg?updatedAt=1700152030955',
+    category: "camping",
   },
   {
     userID: 4,
@@ -65,13 +68,19 @@ const products = [
     description: "Carbon fiber professional poles",
     price: 75,
     image_path: 'https://ik.imagekit.io/7zon7c8tt/81AOYY-23oL.__AC_SX300_SY300_QL70_FMwebp_.webp?updatedAt=1700152105724',
+    category: "hiking",
+
   },
   {
     userID: 5,
-    name: "HIking Boots",
+    name: "Hiking Boots",
     description: "brand new boots ready for the outdoors",
     price: 95,
+
     image_path: "https://ik.imagekit.io/7zon7c8tt/61W7cLtNiLL._AC_SY625_.jpg?updatedAt=1700152181361",
+
+    category: "hiking",
+
   },
 ];
 
@@ -103,10 +112,12 @@ const createTables = async () => {
           name VARCHAR(255) UNIQUE NOT NULL,
           description TEXT NOT NULL,
           price INTEGER NOT NULL,
+
           category VARCHAR(255),
           user_id INTEGER REFERENCES users(id),
           image_path VARCHAR(255)
           
+
           );
           `);
     console.log("Finished building tables!");
@@ -141,6 +152,7 @@ const insertProducts = async () => {
         user_id: users.id,
         image_path: product.image_path,
 
+        category: product.category,
       });
     }
     console.log("Seed data inserted successfully.");

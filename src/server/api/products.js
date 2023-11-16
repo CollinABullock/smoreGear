@@ -8,7 +8,8 @@ const {
     getAllProducts,
     updateProduct,
     deleteProductsById,
-    getProductById
+    getProductById,
+    getProductByCategory
 } = require('../db');
 
 productsRouter.get('/', async( req, res, next) => {
@@ -34,7 +35,7 @@ productsRouter.patch('/:id', async (req, res, next) => {
 
 
 productsRouter.post('/post', async(req, res, next) => {
-   const {name, description, price = ""} = req.body;
+   const {name, description, price, category = ""} = req.body;
 
    const postProducts = {};
 
@@ -42,6 +43,7 @@ productsRouter.post('/post', async(req, res, next) => {
     postProducts.name = name;
     postProducts.description = description;
     postProducts.price = price;
+    postProducts.category = category;
 
     const products = await createProduct(postProducts)
 

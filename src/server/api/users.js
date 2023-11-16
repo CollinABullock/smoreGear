@@ -1,5 +1,6 @@
 const express = require('express')
 const usersRouter = express.Router();
+const { requireUser } = require("./utils");
 
 const {
     createUser,
@@ -101,6 +102,14 @@ usersRouter.get('/:id', async (req, res, next) => {
         next(error);
     }
 });
+
+usersRouter.get("/me", requireUser, async (req, res, next) => {
+    try {
+      res.send(req.user);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 usersRouter.patch('guest/:id', async (req, res, next) => {
     try {

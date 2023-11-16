@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -25,14 +26,16 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  console.log(message);
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -42,38 +45,60 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+
+    try {
+      const result = await login(); // Passing our async function in from below.
+    
+      props.setIsLoggedIn(true);
+      props.setLoggedInUser(email); // Telling program login is true.
+
+      navigate('/products');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const login = async () => {
     try {
         const response = await fetch('http://localhost:3000/api/users/login', {
             method: 'POST',
             headers: {
-                'Content-Type' : 'application/json'
-            }, 
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 email,
-                password
-            })
+                password,
+            }),
         });
-        const result = await response.json();
-        setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
+
+        // Check if the response is in JSON format
+        if (!response.ok) {
+            const result = await response.json();
+            throw result;
         }
+
+        const result = await response.json();
+        console.log(result.token);
+
+        localStorage.setItem("token", result.token);
+
+        // Log information about the response before consuming the body
+        console.log(response.status, response.headers, response.statusText, result.token);
+
+        setMessage(result.message);
+
         setEmail('');
         setPassword('');
-
-        console.log(response.status, response.headers, response.statusText);
-        console.log(await response.text());
-
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
     }
-  }
+};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login();
-  };
+
+  
 
   console.log("email:", email);
   console.log("password:", password);
@@ -149,11 +174,6 @@ const Login = () => {
               </Button>
               <p>{message}</p>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <Link href="/users/register" variant="body2">
                     {"Don't have an account? Sign Up"}

@@ -34,8 +34,6 @@ export default function CreatePost() {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
-  
-
 
   const handleSubmit = async (e) => {
    e.preventDefault();

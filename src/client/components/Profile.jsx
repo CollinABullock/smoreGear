@@ -1,28 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Profile.css";
-import Delete from "./Delete";
+import NavBar from "./navBar";
 
-
-const BASE_URL = `http://localhost:3000`;
 
 function Profile() {
+  const [user, setUser] = useState([]); 
+  const [messages, setMessages] = useState([]);
 
-  const user = {
-    name: 'John Doe',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et libero justo.',
-    profilePicture: 'https://example.com/profile-picture.jpg',
-    socialLinks: {
-      twitter: 'https://twitter.com/johndoe',
-      linkedin: 'https://www.linkedin.com/in/johndoe',
-      github: 'https://github.com/johndoe',
-    },
-  }
+
   useEffect(() => {
     async function userProfile() {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`${BASE_URL}/users`, {
+        const response = await fetch("http://localhost:3000/api/users/me", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -31,8 +21,10 @@ function Profile() {
 
         // Outside of fetch starting here.
         const result = await response.json();
-        console.log(result.data.messages);
+        console.log(messages);
         setMessages(result.data.messages);
+        console.log(user)
+        setUser(result.data.user);
         return result;
       } catch (error) {
         console.log(error);
@@ -42,23 +34,30 @@ function Profile() {
   }, []);
 
   return (
-    <div className="profile-container">
-      <img src={user.profilePicture} alt="Profile" className="profile-picture" />
-      <h1>{user.name}</h1>
-      <p className="bio">{user.bio}</p>
-      <div className="social-links">
-        <a href={user.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-          Twitter
-        </a>
-        <a href={user.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
-        <a href={user.socialLinks.github} target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
+    <>
+    <NavBar />
+    <div className="message-container">
+      <div className="profileTag">
+        <h1>Profile</h1>
+      </div>
+      <div id="messageBox">
+        <p></p>
+        <h2>Messages</h2>
+        {messages.length ? (
+          messages.map((e) => {
+            return (
+              <div key={e._id} className="profileMessages">
+                {e.content}
+              </div>
+            );
+          })
+        ) : (
+          <div>No Messages Found</div>
+        )}
       </div>
     </div>
+    </>
   );
-};
+}
 
 export default Profile;
