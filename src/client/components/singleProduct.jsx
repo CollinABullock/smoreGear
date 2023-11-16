@@ -5,6 +5,7 @@ import ShoppingCart from "./shoppingcart";
 
 
 async function fetchSingleProduct(id) {
+  console.log(id);
   try {
     const response = await fetch(`http://localhost:3000/api/products/${id}`);
     const result = await response.json();
@@ -15,18 +16,26 @@ async function fetchSingleProduct(id) {
   }
 }
 
-async function handleDelete() {
+async function handleDelete(id, navigate) {
   try {
-    const response = await fetch (`http://localhost:3000/api/products/${id}`, {
-      method: "DELETE"
+    const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    navigate("/products"); // Navigate after successful deletion
     const result = await response.json();
     return result;
-} catch (error) {
-  console.error(error);
+  } catch (error) {
+    console.error(error);
+  }
 }
-}
-
 
 export default function SingleProduct() {
   const [product, setProduct] = useState([]);
@@ -40,6 +49,14 @@ export default function SingleProduct() {
     navigate("/products");
   }
 
+  const handleProductDelete = async (id) => {
+    try {
+      await handleDelete(id, navigate); // Pass navigate function to handleDelete
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
  useEffect(() => {
   async function getSingleProduct() {
     const response = await fetchSingleProduct(id);
@@ -49,18 +66,22 @@ export default function SingleProduct() {
   getSingleProduct()
  }, [])
 
+ 
+
  console.log("towards the end", product);
 
   return (
     <>
     <NavBar />
     <h1>{product.name}</h1>
+    <h3>Category: {product.category}</h3>
     <h3>${product.price}</h3>
     <p>Sold by {product.user_id}</p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
     <button onClick={ShoppingCart} >Add to shopping Cart </button>
-    <button onClick={handleDelete}>Delete Product</button>
+    <button onClick={() => handleProductDelete(product.id)}>Delete Product</button>
+
       
     </>
   )
