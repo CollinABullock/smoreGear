@@ -42,6 +42,7 @@ const products = [
     name: "kyak",
     description: "old and used",
     price: 20,
+    category: "water",
   },
 
   {
@@ -49,24 +50,28 @@ const products = [
     name: "Camping Tent",
     description: "Family size. Fits up to 4 people",
     price: 300,
+    category: "camping",
   },
   {
     userID: 3,
     name: "Bear spray",
     description: "Potent bear spray to keep them away",
     price: 50,
+    category: "camping",
   },
   {
     userID: 4,
     name: "Trekking Poles",
     description: "Carbon fiber professional poles",
     price: 75,
+    category: "hiking",
   },
   {
     userID: 5,
-    name: "HIking Boots",
+    name: "Hiking Boots",
     description: "brand new boots ready for the outdoors",
     price: 95,
+    category: "hiking",
   },
 ];
 
@@ -98,7 +103,7 @@ const createTables = async () => {
           name VARCHAR(255) UNIQUE NOT NULL,
           description TEXT NOT NULL,
           price INTEGER NOT NULL,
-          category VARCHAR(255) UNIQUE NOT NULL,
+          category VARCHAR(255) UNIQUE ,
           user_id INTEGER REFERENCES users(id)
           );
           `);
@@ -131,7 +136,8 @@ const insertProducts = async () => {
         name: product.name,
         description: product.description,
         price: product.price,
-        user_id: users.id
+        user_id: users.id,
+        category: product.category,
       });
     }
     console.log("Seed data inserted successfully.");
