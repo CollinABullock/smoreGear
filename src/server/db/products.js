@@ -1,13 +1,13 @@
 const db = require('./client')
 // const util = require('util');
+// const insertProducts = require('./products');
 
-
-const createProduct = async({ name, description, price, user_id }) => {
+const createProduct = async({ name, description, price, user_id, image_path }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price, user_id)
-        VALUES($1, $2, $3, $4)
-        RETURNING *`, [name, description, price, user_id]);
+        INSERT INTO products(name, description, price, user_id, image_path)
+        VALUES($1, $2, $3, $4, $5 )
+        RETURNING *`, [name, description, price, user_id, image_path]);
 
         return product;
     } catch (err) {
@@ -68,7 +68,7 @@ async function updateProduct(id, fields = {}) {
 async function getAllProducts() {
     try {
       const { rows } = await db.query(`
-        SELECT id, name, description, price 
+        SELECT id, name, description, price, image_path, user_id
         FROM products;
       `);
     
@@ -77,18 +77,28 @@ async function getAllProducts() {
       throw error;
     }
   }
-
   async function getProductByCategory(productId){
     try {
       const {rows: [ product ]} = await db.query(`
-        SELECT category FROM products
-        WHERE category = $3
+        SELECT id, name, description, price, image_path, category FROM products
+        WHERE category = $1
       `, [productId]);
       return product;
     } catch (error) {
       throw error;
     }
   }
+  // async function getProductByCategory(productId){
+  //   try {
+  //     const {rows: [ product ]} = await db.query(`
+  //       SELECT category FROM products
+  //       WHERE category = $3
+  //     `, [productId]);
+  //     return product;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
   
 
   async function deleteProductsById(productsId) {
