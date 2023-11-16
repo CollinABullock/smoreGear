@@ -25,8 +25,8 @@ function NavBar(props) {
         <>
          <div className="navbar" >
           <Link className="links" to="/users/profile">My Profile</Link>
-          <Link className="links" to="/createpost">Create Post</Link>
-          <Link className="links" to="/allposts">All Posts</Link>
+          <Link className="links" to="/products/create-post">Create Post</Link>
+          <Link className="links" to="/products">See what's for sale</Link>
           <button id="logout-button"
             onClick={() => {
               setIsLoggedIn(false);
