@@ -38,14 +38,30 @@ export default function App() {
   <Route path="/users/profile" element={<Profile loggedInUser={loggedInUser}
               items={items}
               setItems={setItems}/>} />
-  <Route path="/users" element={<AllUsers />} />
-  <Route path="/products" element={<AllProducts />} />
-  <Route path="/products/create-post" element={<CreatePost />} />
-  <Route path="/users/register" element={<Register />} />
-  <Route path="/products/:id" element={<SingleProduct />} />
-  <Route path="/users/:id" element={<SingleUser />} />
-  <Route path="/products/shoppingcart" element={<ShoppingCart />} />
-  <Route path="/products/submission" element={<Submission />} />
+  <Route path="/users" element={<AllUsers loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/products" element={<AllProducts loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/products/create-post" element={<CreatePost loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/users/register" element={<Register loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/products/:id" element={<SingleProduct loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/users/:id" element={<SingleUser loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/products/shoppingcart" element={<ShoppingCart loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/products/submission" element={<Submission loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
 
 
 </Routes>

@@ -60,6 +60,7 @@ const Login = (props) => {
       props.setLoggedInUser(email); // Telling program login is true.
 
       
+      
 
     } catch (error) {
       console.log(error);
@@ -94,6 +95,7 @@ const Login = (props) => {
         console.log(response.status, response.headers, response.statusText, result.token);
 
         setMessage(result.message);
+        window.alert("You are logged in!  Welcome to S'More Gear!");
 
         setEmail('');
         setPassword('');
