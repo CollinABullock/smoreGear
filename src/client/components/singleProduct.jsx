@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
 import ShoppingCart from "./shoppingcart";
 
+
 async function fetchSingleProduct(id) {
   try {
     const response = await fetch(`http://localhost:3000/api/products/${id}`);
@@ -12,6 +13,18 @@ async function fetchSingleProduct(id) {
   } catch (error) {
     console.log(error);
   }
+}
+
+async function handleDelete() {
+  try {
+    const response = await fetch (`http://localhost:3000/api/products/${id}`, {
+      method: "DELETE"
+    });
+    const result = await response.json();
+    return result;
+} catch (error) {
+  console.error(error);
+}
 }
 
 
@@ -47,6 +60,7 @@ export default function SingleProduct() {
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
     <button onClick={ShoppingCart} >Add to shopping Cart </button>
+    <button onClick={handleDelete}>Delete Product</button>
       
     </>
   )

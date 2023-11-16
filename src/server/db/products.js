@@ -2,12 +2,12 @@ const db = require('./client')
 // const util = require('util');
 
 
-const createProduct = async({ name, description, price, user_id }) => {
+const createProduct = async({ name, description, price, user_id, category }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price, user_id)
-        VALUES($1, $2, $3, $4)
-        RETURNING *`, [name, description, price, user_id]);
+        INSERT INTO products(name, description, price, user_id, category)
+        VALUES($1, $2, $3, $4, $5)
+        RETURNING *`, [name, description, price, user_id, category]);
 
         return product;
     } catch (err) {
@@ -68,7 +68,7 @@ async function updateProduct(id, fields = {}) {
 async function getAllProducts() {
     try {
       const { rows } = await db.query(`
-        SELECT id, name, description, price 
+        SELECT id, name, description, price, category 
         FROM products;
       `);
     
@@ -81,8 +81,8 @@ async function getAllProducts() {
   async function getProductByCategory(productId){
     try {
       const {rows: [ product ]} = await db.query(`
-        SELECT category FROM products
-        WHERE category = $3
+        SELECT * FROM products
+        WHERE category = $1
       `, [productId]);
       return product;
     } catch (error) {
