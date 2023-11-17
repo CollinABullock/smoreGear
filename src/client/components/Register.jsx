@@ -41,7 +41,9 @@ function Copyright(props) {
   
      try {
          const result = await registerUser(name, email, password);
-         navigate('/');
+         localStorage.setItem("token", result.token);
+         window.alert("Welcome to S'More Gear!");
+         navigate('/products');
      } catch (error) {
          console.log(error);
      }
@@ -65,7 +67,8 @@ function Copyright(props) {
                // The POST request was successful (status code 200 Created)
                const result = await response.json();
                return result;
-           } else {
+           } 
+           else {
                // Handle errors or other status codes here
                throw new Error("Failed to create a post");
            }

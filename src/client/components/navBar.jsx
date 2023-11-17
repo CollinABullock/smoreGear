@@ -42,7 +42,7 @@ function NavBar(props) {
           <Link className="links" to="/products">
            See what's for sale
           </Link>
-          <Link className="links" to="/users/login">
+          <Link className="links" to="/">
             Login
           </Link>
           <Link className="links" to="/users/register">

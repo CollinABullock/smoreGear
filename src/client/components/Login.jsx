@@ -51,7 +51,7 @@ const Login = (props) => {
     e.preventDefault();
     console.log(email, password);
 
-    navigate('/products');
+    
 
     try {
       const result = await login(); // Passing our async function in from below.
@@ -83,13 +83,14 @@ const Login = (props) => {
         // Check if the response is in JSON format
         if (!response.ok) {
             const result = await response.json();
-            throw result;
+            return result;
         }
 
         const result = await response.json();
         console.log(result.token);
 
         localStorage.setItem("token", result.token);
+        navigate('/products');
 
         // Log information about the response before consuming the body
         console.log(response.status, response.headers, response.statusText, result.token);
@@ -100,6 +101,7 @@ const Login = (props) => {
         setEmail('');
         setPassword('');
     } catch (err) {
+      setMessage(err.message)
         console.error(`${err.name}: ${err.message}`);
     }
 };
