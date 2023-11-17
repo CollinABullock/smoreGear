@@ -13,7 +13,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { PersonPinSharp } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -55,14 +54,15 @@ const Login = (props) => {
 
     try {
       const result = await login(); // Passing our async function in from below.
-    
-      props.setIsLoggedIn(true);
-      props.setLoggedInUser(email); // Telling program login is true.
+      setMessage(result.message)
+      // props.setIsLoggedIn(true);
+      // props.setLoggedInUser(email); // Telling program login is true.
 
       
       
 
     } catch (error) {
+      setMessage("Login unsuccessful, please try again!")
       console.log(error);
     }
   };
@@ -84,7 +84,8 @@ const Login = (props) => {
         if (!response.ok) {
             const result = await response.json();
             return result;
-        }
+        } 
+      
 
         const result = await response.json();
         console.log(result.token);
@@ -96,13 +97,14 @@ const Login = (props) => {
         console.log(response.status, response.headers, response.statusText, result.token);
 
         setMessage(result.message);
-        window.alert("You are logged in!  Welcome to S'More Gear!");
+        window.alert("Welcome to S'More Gear!");
 
         setEmail('');
         setPassword('');
-    } catch (err) {
-      setMessage(err.message)
-        console.error(`${err.name}: ${err.message}`);
+    } catch (error) {
+      setMessage("Log in unsuccessful");
+        console.error(`${error.name}: ${error.message}`);
+        
     }
 };
 
