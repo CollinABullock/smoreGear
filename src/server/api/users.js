@@ -7,7 +7,6 @@ const {
     getUser,
     getUserByEmail,
     getAllUsers,
-    updateUser,
     getUserById
 } = require('../db');
 
@@ -38,14 +37,17 @@ usersRouter.post('/login', async(req, res, next) => {
         if(user) {
             const token = jwt.sign({
                 id: user.id,
-                email
+                email: user.email,
+                
+                
             }, process.env.JWT_SECRET, {
                 expiresIn: '1w'
             });
 
             res.send({
                 message: 'Login successful!',
-                token
+                token,
+                user
             });
         }
         else {
@@ -103,21 +105,12 @@ usersRouter.get('/:id', async (req, res, next) => {
     }
 });
 
-usersRouter.get("/me", requireUser, async (req, res, next) => {
-    try {
-      res.send(req.user);
-    } catch (error) {
-      next(error);
-    }
+usersRouter.get('/me', requireUser, (req, res) => {
+    // The user information is attached to the request object by the middleware
+    const user = req.user;
+    // Send the user information as the response
+    res.json({ user });
   });
 
-usersRouter.patch('guest/:id', async (req, res, next) => {
-    try {
-        const updatedUsers = await updateUser(req.params.id, req.body);
-        res.send(updatedUsers)
-    } catch (error) {
-        console.log(error);
-    }
-});
 
 module.exports = usersRouter;

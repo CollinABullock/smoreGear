@@ -89,8 +89,12 @@ const Login = (props) => {
 
         const result = await response.json();
         console.log(result.token);
+        console.log(result.user);
 
         localStorage.setItem("token", result.token);
+        localStorage.setItem("userName", result.user.name);
+        localStorage.setItem("userID", result.user.id)
+        localStorage.setItem("userEmail", result.user.email)
         navigate('/products');
 
         // Log information about the response before consuming the body

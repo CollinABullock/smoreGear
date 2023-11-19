@@ -90,9 +90,10 @@ const handlePriceChange = (e) => {
   return (
     <>
     <NavBar />
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+    {/* <ThemeProvider theme={defaultTheme} > */}
+      <Container component="main" maxWidth="xs" >
         <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -158,7 +159,7 @@ const handlePriceChange = (e) => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
     </>
   );
 }
