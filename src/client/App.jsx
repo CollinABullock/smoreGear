@@ -10,6 +10,7 @@ import CreatePost from "./components/create-post";
 import Submission from "./components/submission";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/shoppingcart";
+import ResponsiveAppBar from "./components/navBar2";
 
 
 
@@ -60,6 +61,9 @@ export default function App() {
               items={items}
               setItems={setItems}/>} />
   <Route path="/products/submission" element={<Submission loggedInUser={loggedInUser}
+              items={items}
+              setItems={setItems}/>} />
+  <Route path="/navbar" element={<ResponsiveAppBar loggedInUser={loggedInUser}
               items={items}
               setItems={setItems}/>} />
 
