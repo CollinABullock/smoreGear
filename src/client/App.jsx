@@ -10,7 +10,6 @@ import CreatePost from "./components/create-post";
 import Submission from "./components/submission";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/shoppingcart";
-import AllProducts2 from "./components/allProducts2";
 
 
 
@@ -65,9 +64,7 @@ export default function App() {
   <Route path="/products/submission" element={<Submission loggedInUser={loggedInUser}
               items={items}
               setItems={setItems}/>} />
-  <Route path="/products2" element={<AllProducts2 loggedInUser={loggedInUser}
-              items={items}
-              setItems={setItems}/>} />
+
 
 
 

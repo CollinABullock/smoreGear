@@ -88,7 +88,7 @@ localStorage.setItem("shoppingCart", JSON.stringify(arr));
     <h1>{product.name}</h1>
     <h3>Category: {product.category}</h3>
     <h3>${product.price}</h3>
-    <p><a href={`/users/${product.id}`}>Who's selling it?</a></p>
+    <p><a href={`/users/${product.userid}`}>Who's selling it?</a></p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
 
