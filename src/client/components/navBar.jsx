@@ -130,12 +130,19 @@ function ResponsiveAppBar() {
               >
                Sell something!
               </Button>
+              <Button
+                href='/products/shoppingcart'
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily: "impact", fontSize: "1em" }}
+              >
+               Shopping cart
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="https://cdn.backpacker.com/wp-content/uploads/2023/05/womens-hiking-tops-sgg23_h.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

@@ -32,6 +32,7 @@ export default function App() {
     
     <BrowserRouter>
 <Routes>
+
   <Route path="/" element={<Login loggedInUser={loggedInUser}
   isLoggedIn = {isLoggedIn}
               items={items}
@@ -63,6 +64,7 @@ export default function App() {
   <Route path="/products/submission" element={<Submission loggedInUser={loggedInUser}
               items={items}
               setItems={setItems}/>} />
+
 
 
 </Routes>
