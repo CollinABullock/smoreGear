@@ -113,7 +113,7 @@ const createTables = async () => {
           description TEXT NOT NULL,
           price INTEGER NOT NULL,
           category VARCHAR(255),
-          userID INTEGER REFERENCES users(id),
+          userID INTEGER NOT NULL,
           image_path VARCHAR(255)
           
 
@@ -148,7 +148,7 @@ const insertProducts = async () => {
         name: product.name,
         description: product.description,
         price: product.price,
-        userID: users.id,
+        userID: product.userID,
         image_path: product.image_path,
         category: product.category,
       });

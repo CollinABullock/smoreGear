@@ -33,6 +33,7 @@ export default function CreatePost() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
+  const userID = localStorage.setItem()
 
 
   const handleSubmit = async (e) => {

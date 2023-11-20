@@ -42,6 +42,9 @@ function Copyright(props) {
      try {
          const result = await registerUser(name, email, password);
          localStorage.setItem("token", result.token);
+         localStorage.setItem("userName", result.user.name);
+         localStorage.setItem("userID", result.user.id)
+         localStorage.setItem("userEmail", result.user.email)
          window.alert("Welcome to S'More Gear!");
          navigate('/products');
      } catch (error) {
