@@ -127,7 +127,7 @@ console.log("all products", products);
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-      <Typography variant="h6" align="center" gutterBottom>
+        <Typography variant="h6" align="center" gutterBottom>
          S'More Gear
         </Typography>
         <Typography
