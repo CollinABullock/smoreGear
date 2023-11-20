@@ -76,7 +76,7 @@ export default function SingleProduct() {
     <h1>{product.name}</h1>
     <h3>Category: {product.category}</h3>
     <h3>${product.price}</h3>
-    <p>Sold by {product.user_id}</p>
+    <p>{product.userid}</p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
     <button onClick={ShoppingCart} >Add to shopping Cart </button>
