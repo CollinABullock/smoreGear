@@ -31,7 +31,7 @@ export default function App() {
   <Route path="/users/register" element={<Register />} />
   <Route path="/products/:id" element={<SingleProduct />} />
   <Route path="/users/:id" element={<SingleUser />} />
-  <Route path="/products/shoppingcart" element={<ShoppingCart />} />
+  <Route path="/shoppingcart" element={<ShoppingCart />} />
   <Route path="/products/submission" element={<Submission />} />
 
 

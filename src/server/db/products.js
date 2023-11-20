@@ -68,7 +68,7 @@ async function updateProduct(id, fields = {}) {
 async function getAllProducts() {
     try {
       const { rows } = await db.query(`
-        SELECT id, name, description, price, category 
+        SELECT id, name, description, price 
         FROM products;
       `);
     

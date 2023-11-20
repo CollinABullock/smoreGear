@@ -27,6 +27,7 @@ function NavBar(props) {
           <Link className="links" to="/profile">My Profile</Link>
           <Link className="links" to="/createpost">Create Post</Link>
           <Link className="links" to="/allposts">All Posts</Link>
+          <Link className="links" to="/shoppingcart">Shopping Cart</Link>
           <button id="logout-button"
             onClick={() => {
               props.setIsLoggedIn(false);
@@ -51,6 +52,7 @@ function NavBar(props) {
           <Link className="links" to="/products/create-post">
             Sell something!
           </Link>
+          <Link className="links" to="/shoppingcart"> Shopping Cart </Link>
          
         </>
       )}
