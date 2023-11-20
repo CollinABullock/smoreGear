@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
 
-import { WidthWideTwoTone } from "@mui/icons-material";
-
 
 async function fetchSingleProduct(id) {
   console.log(id);
@@ -86,6 +84,7 @@ localStorage.setItem("shoppingCart", JSON.stringify(arr));
     <>
     <NavBar />
     <h1>{product.name}</h1>
+    <img src={product.image_path} />
     <h3>Category: {product.category}</h3>
     <h3>${product.price}</h3>
     <p><a href={`/users/${product.userid}`}>Who's selling it?</a></p>
@@ -93,7 +92,7 @@ localStorage.setItem("shoppingCart", JSON.stringify(arr));
     <button onClick={goBack}>Back to products</button><br />
 
     <button className="addToCart" onClick={() => addToCart(id)} >Add to shopping Cart </button>
-    <button onClick={handleDelete}>Delete Product</button>
+    <button onClick={handleProductDelete}>Delete Product</button>
 
       
     </>
