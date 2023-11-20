@@ -42,7 +42,6 @@ export default function SingleUser() {
     <NavBar />
     <h1>{user.name}</h1>
     <h3>{user.email}</h3>
-    <button onClick={goBack}>Back to users</button>
       
     </>
   )

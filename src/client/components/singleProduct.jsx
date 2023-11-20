@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
 import ShoppingCart from "./shoppingcart";
+import { WidthWideTwoTone } from "@mui/icons-material";
 
 
 async function fetchSingleProduct(id) {
@@ -76,7 +77,7 @@ export default function SingleProduct() {
     <h1>{product.name}</h1>
     <h3>Category: {product.category}</h3>
     <h3>${product.price}</h3>
-    <p>{product.userid}</p>
+    <p><a href={`/users/${product.id}`}>Who's selling it?</a></p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
     <button onClick={ShoppingCart} >Add to shopping Cart </button>
