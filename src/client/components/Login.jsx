@@ -29,6 +29,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Login = (props) => {
+  console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -49,14 +50,19 @@ const Login = (props) => {
     e.preventDefault();
     console.log(email, password);
 
+    
+
     try {
       const result = await login(); // Passing our async function in from below.
-    
-      props.setIsLoggedIn(true);
-      props.setLoggedInUser(email); // Telling program login is true.
+      setMessage(result.message)
+      // props.setIsLoggedIn(true);
+      // props.setLoggedInUser(email); // Telling program login is true.
 
-      navigate('/products');
+      
+      
+
     } catch (error) {
+      setMessage("Login unsuccessful, please try again!")
       console.log(error);
     }
   };
@@ -77,23 +83,32 @@ const Login = (props) => {
         // Check if the response is in JSON format
         if (!response.ok) {
             const result = await response.json();
-            throw result;
-        }
+            return result;
+        } 
+      
 
         const result = await response.json();
         console.log(result.token);
+        console.log(result.user);
 
         localStorage.setItem("token", result.token);
+        localStorage.setItem("userName", result.user.name);
+        localStorage.setItem("userID", result.user.id)
+        localStorage.setItem("userEmail", result.user.email)
+        navigate('/products');
 
         // Log information about the response before consuming the body
         console.log(response.status, response.headers, response.statusText, result.token);
 
         setMessage(result.message);
+        window.alert("Welcome to S'More Gear!");
 
         setEmail('');
         setPassword('');
-    } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+    } catch (error) {
+      setMessage("Log in unsuccessful");
+        console.error(`${error.name}: ${error.message}`);
+        
     }
 };
 

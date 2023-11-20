@@ -53,7 +53,8 @@ return (
     <>
    <div className="allProducts">
     <a href={`/products/${products.id}`}>
-{products.name} - ${products.price}
+    <img src={products.image_path} alt={products.name} /> {/* Add this line */}
+        <h2>{products.name}</h2>
 </a>
 </div>
   </>
@@ -64,6 +65,10 @@ return (
 }  
 
 
+
+
+
+     
 
 
 

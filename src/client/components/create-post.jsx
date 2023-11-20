@@ -33,6 +33,7 @@ export default function CreatePost() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
+  const userID = localStorage.getItem("userID");
 
 
   const handleSubmit = async (e) => {
@@ -56,7 +57,8 @@ export default function CreatePost() {
              body: JSON.stringify({
                  name: name,
                  description: description,
-                 price: price
+                 price: price,
+                 userID: userID
              })
          });
          
@@ -90,9 +92,10 @@ const handlePriceChange = (e) => {
   return (
     <>
     <NavBar />
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+    {/* <ThemeProvider theme={defaultTheme} > */}
+      <Container component="main" maxWidth="xs" >
         <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -158,7 +161,7 @@ const handlePriceChange = (e) => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
     </>
   );
 }

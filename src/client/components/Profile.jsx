@@ -4,58 +4,16 @@ import NavBar from "./navBar";
 
 
 function Profile() {
-  const [user, setUser] = useState([]); 
-  const [messages, setMessages] = useState([]);
+        const userName = localStorage.getItem("userName");
+        const userEmail = localStorage.getItem("userEmail");
 
-
-  useEffect(() => {
-    async function userProfile() {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:3000/api/users/me", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        // Outside of fetch starting here.
-        const result = await response.json();
-        console.log(messages);
-        setMessages(result.data.messages);
-        console.log(user)
-        setUser(result.data.user);
-        return result;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    userProfile();
-  }, []);
 
   return (
     <>
     <NavBar />
-    <div className="message-container">
-      <div className="profileTag">
-        <h1>Profile</h1>
-      </div>
-      <div id="messageBox">
-        <p></p>
-        <h2>Messages</h2>
-        {messages.length ? (
-          messages.map((e) => {
-            return (
-              <div key={e._id} className="profileMessages">
-                {e.content}
-              </div>
-            );
-          })
-        ) : (
-          <div>No Messages Found</div>
-        )}
-      </div>
-    </div>
+    <h1>Who are you?</h1>
+    <h2>{userName}</h2>
+    <h2>{userEmail}</h2>
     </>
   );
 }

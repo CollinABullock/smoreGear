@@ -1,13 +1,16 @@
+const { Category } = require('@mui/icons-material');
 const db = require('./client')
 // const util = require('util');
+// const insertProducts = require('./products');
 
 
-const createProduct = async({ name, description, price, user_id, category }) => {
+const createProduct = async({ name, description, price, userID, category, image_path }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price, user_id, category)
-        VALUES($1, $2, $3, $4, $5)
-        RETURNING *`, [name, description, price, user_id, category]);
+        INSERT INTO products(name, description, price, userID, category, image_path)
+        VALUES($1, $2, $3, $4, $5, $6 )
+        RETURNING *`, [name, description, price, userID, category, image_path]);
+
 
         return product;
     } catch (err) {
@@ -68,7 +71,11 @@ async function updateProduct(id, fields = {}) {
 async function getAllProducts() {
     try {
       const { rows } = await db.query(`
-        SELECT id, name, description, price 
+
+
+        SELECT id, name, description, price, image_path, userID
+
+
         FROM products;
       `);
     
@@ -77,11 +84,12 @@ async function getAllProducts() {
       throw error;
     }
   }
-
   async function getProductByCategory(productId){
     try {
       const {rows: [ product ]} = await db.query(`
-        SELECT * FROM products
+
+        SELECT id, name, description, price, image_path, category FROM products
+
         WHERE category = $1
       `, [productId]);
       return product;
@@ -89,6 +97,17 @@ async function getAllProducts() {
       throw error;
     }
   }
+  // async function getProductByCategory(productId){
+  //   try {
+  //     const {rows: [ product ]} = await db.query(`
+  //       SELECT category FROM products
+  //       WHERE category = $3
+  //     `, [productId]);
+  //     return product;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
   
 
   async function deleteProductsById(productsId) {
