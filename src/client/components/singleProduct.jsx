@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
-import ShoppingCart from "./shoppingcart";
+
 import { WidthWideTwoTone } from "@mui/icons-material";
 
 
@@ -71,6 +71,17 @@ export default function SingleProduct() {
 
  console.log("towards the end", product);
 
+ function addToCart(productId) {
+  var arr = [];
+  if (localStorage.getItem("shoppingCart") !== null) {
+
+    arr= JSON.parse(localStorage.getItem("shoppingCart"));
+    }
+    console.log(arr);
+  arr.push(productId);
+localStorage.setItem("shoppingCart", JSON.stringify(arr));
+ };
+
   return (
     <>
     <NavBar />
@@ -80,8 +91,9 @@ export default function SingleProduct() {
     <p><a href={`/users/${product.id}`}>Who's selling it?</a></p>
     <p>{product.description}</p>
     <button onClick={goBack}>Back to products</button><br />
-    <button onClick={ShoppingCart} >Add to shopping Cart </button>
-    <button onClick={() => handleProductDelete(product.id)}>Delete Product</button>
+
+    <button className="addToCart" onClick={() => addToCart(id)} >Add to shopping Cart </button>
+    <button onClick={handleDelete}>Delete Product</button>
 
       
     </>
