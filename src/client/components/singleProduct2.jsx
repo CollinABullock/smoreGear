@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ProductionQuantityLimitsSharp } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -134,37 +135,15 @@ localStorage.setItem("shoppingCart", JSON.stringify(arr));
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              {product.name}
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+            <Typography component="h2" variant="h5">
+              Category:{product.category} // Price:${product.price}
+            </Typography>
+            <Typography component="p" variant="h5">
+              {product.description}
+            </Typography>
               <Button
                 type="submit"
                 fullWidth
@@ -187,7 +166,7 @@ localStorage.setItem("shoppingCart", JSON.stringify(arr));
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
-          </Box>
+        
         </Grid>
       </Grid>
     </ThemeProvider>

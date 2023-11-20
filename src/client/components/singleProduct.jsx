@@ -1,7 +1,33 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import NavBar from "./navBar";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
 
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { useState, useEffect} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+        S'More Gear (T Bergin, J Browning, F Burton, C Bullock, A Nunez)
+      {' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+// TODO remove, this demo shouldn't need to reset the theme.
+
+const defaultTheme = createTheme();
 
 async function fetchSingleProduct(id) {
   console.log(id);
@@ -48,6 +74,11 @@ export default function SingleProduct() {
     navigate("/products");
   }
 
+  const soldBy = () => {
+      navigate(`/products/${product.userid}`); // Navigating to the seller's products using the seller's ID
+  };
+  
+
   const handleProductDelete = async (id) => {
     try {
       await handleDelete(id, navigate); // Pass navigate function to handleDelete
@@ -70,31 +101,88 @@ export default function SingleProduct() {
  console.log("towards the end", product);
 
  function addToCart(productId) {
-  var arr = [];
-  if (localStorage.getItem("shoppingCart") !== null) {
+  let arr = [];
 
-    arr= JSON.parse(localStorage.getItem("shoppingCart"));
-    }
-    console.log(arr);
+  // Retrieve existing cart items from localStorage
+  if (localStorage.getItem("shoppingCart")) {
+    arr = JSON.parse(localStorage.getItem("shoppingCart"));
+  }
+
+  // Push new product ID to the cart array
   arr.push(productId);
-localStorage.setItem("shoppingCart", JSON.stringify(arr));
- };
+
+  // Store the updated cart array back in localStorage
+  localStorage.setItem("shoppingCart", JSON.stringify(arr));
+}
+
 
   return (
-    <>
-    <NavBar />
-    <h1>{product.name}</h1>
-    <img src={product.image_path} />
-    <h3>Category: {product.category}</h3>
-    <h3>${product.price}</h3>
-    <p><a href={`/users/${product.userid}`}>Who's selling it?</a></p>
-    <p>{product.description}</p>
-    <button onClick={goBack}>Back to products</button><br />
-
-    <button className="addToCart" onClick={() => addToCart(id)} >Add to shopping Cart </button>
-    <button onClick={handleProductDelete}>Delete Product</button>
-
-      
-    </>
-  )
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: `url(${product.image_path})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: "center"
+            }}
+          >
+            <Typography component="h1" variant="h1">
+              {product.name}
+            </Typography>
+            <Typography component="h1" variant="h4">
+              Category: {product.category}<br />
+              Price: ${product.price}
+            </Typography>
+            <Typography component="h2" variant="p">
+              {product.description}
+            </Typography>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                onClick={() => addToCart(product.id)}
+                sx={{ mt: 3, mb: 2 }}
+              >
+               Add to cart
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                <a href={`/users/${product.userid}`}>
+                <Typography component="h2" variant="p">
+                    Who's selling this?
+                  </Typography></a>
+                </Grid>
+                <Grid item>
+                  <a href="/products">
+                <Typography component="h2" variant="p">
+                    Back to products
+                  </Typography></a>
+                </Grid>
+              </Grid>
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+        
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
 }
