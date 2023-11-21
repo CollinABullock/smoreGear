@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import Select from "react-dropdown-select";
 
-
-
-
-function Dropdown() {
-    const [value, setValue] = useState()
-    
+export default function Dropdown({ onSelectCategory }) {
+    const [category, setCategory] = useState();
 
     const options = [
-        {label: "Hiking", value: 1},
-        {label: "Camping", value: 2},
-        {label: "Water", value: 3},
-        {label: "Miscellaneous", value: 4}
-    ]
+        { label: "Hiking", value: "Hiking" },
+        { label: "Camping", value: "Camping" },
+        { label: "Water", value: "Water" },
+        { label: "Miscellaneous", value: "Miscellaneous" }
+    ];
+
+    const handleCategoryChange = (category) => {
+        setCategory(category);
+        onSelectCategory(category);
+    };
 
     return (
-       <div>
         <div>
-            <h4>Select Category!</h4>
-            <Select
-            name="select"
-            options={options}
-            onChange={value => setValue(value)}
-            >
-
-            </Select>
+            <div>
+                <h4>Select Category!</h4>
+                <Select
+                    name="select"
+                    options={options}
+                    onChange={(selected) => handleCategoryChange(selected)}
+                />
+            </div>
         </div>
-       </div>
-    )
+    );
 }
-
-export default Dropdown;

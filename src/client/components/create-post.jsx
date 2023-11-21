@@ -35,18 +35,26 @@ export default function CreatePost() {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
   const userID = localStorage.getItem("userID");
+  const [selectedCategory, setSelectedCategory] = useState();
+
+  console.log(selectedCategory);
+
+  const handleSelectCategory = (selected) => {
+    setSelectedCategory(selected);
+  };
 
 
   const handleSubmit = async (e) => {
-   e.preventDefault();
+    e.preventDefault();
 
-   try {
-       const result = await createPost(name, description, price);
-       navigate('/products');
-   } catch (error) {
-       console.log(error);
-   }
-}
+    try {
+      const result = await createPost(name, description, price, selectedCategory);
+      navigate('/products');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
    async function createPost(name, description, price) {
      try {
@@ -146,7 +154,7 @@ const handlePriceChange = (e) => {
                 />
               </Grid>
             </Grid>
-            <Dropdown />
+            <Dropdown onSelectCategory={handleSelectCategory} />
             <Button
               type="submit"
               fullWidth

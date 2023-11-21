@@ -73,7 +73,7 @@ async function getAllProducts() {
       const { rows } = await db.query(`
 
 
-        SELECT id, name, description, price, image_path, userID
+        SELECT id, name, description, price, image_path, category, userID
 
 
         FROM products;
