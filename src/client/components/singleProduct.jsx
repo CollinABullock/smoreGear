@@ -70,15 +70,6 @@ export default function SingleProduct() {
 
   const navigate = useNavigate();
 
-  const goBack = () => {
-    navigate("/products");
-  }
-
-  const soldBy = () => {
-      navigate(`/products/${product.userid}`); // Navigating to the seller's products using the seller's ID
-  };
-  
-
   const handleProductDelete = async (id) => {
     try {
       await handleDelete(id, navigate); // Pass navigate function to handleDelete
@@ -96,7 +87,6 @@ export default function SingleProduct() {
   getSingleProduct()
  }, [])
 
- 
 
  console.log("towards the end", product);
 
@@ -113,6 +103,8 @@ export default function SingleProduct() {
 
   // Store the updated cart array back in localStorage
   localStorage.setItem("shoppingCart", JSON.stringify(arr));
+
+  navigate("/products/shoppingcart");
 }
 
 
@@ -159,7 +151,7 @@ export default function SingleProduct() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={() => addToCart(product.id)}
+                onClick={() => addToCart(product.id)} 
                 sx={{ mt: 3, mb: 2 }}
               >
                Add to cart
