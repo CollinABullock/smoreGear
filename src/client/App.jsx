@@ -9,6 +9,7 @@ import SingleUser from "./components/singleUser";
 import CreatePost from "./components/create-post";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/shoppingcart";
+import Dropdown from "./components/Dropdown";
 
 
 
@@ -61,8 +62,9 @@ export default function App() {
   <Route path="/products/shoppingcart" element={<ShoppingCart loggedInUser={loggedInUser}
               items={items}
               setItems={setItems}/>} />
-
-
+  <Route path ="/products/dropdown" element={<Dropdown loggedInUser={loggedInUser} 
+              items={items} 
+              setItems={setItems} />} />
 
 
 

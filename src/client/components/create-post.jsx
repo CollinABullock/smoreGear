@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from './navBar';
+import Dropdown from './Dropdown';
 
 function Copyright(props) {
   return (
@@ -145,6 +146,7 @@ const handlePriceChange = (e) => {
                 />
               </Grid>
             </Grid>
+            <Dropdown />
             <Button
               type="submit"
               fullWidth
