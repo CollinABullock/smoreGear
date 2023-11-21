@@ -114,9 +114,11 @@ const createTables = async () => {
       price INTEGER NOT NULL,
       category VARCHAR(255),
       userID INTEGER NOT NULL,
-      image_path VARCHAR(255),
-      INDEX products_category_index (category)
+      image_path VARCHAR(255)
     );
+    
+    CREATE INDEX products_category_index ON products(category);
+    
           `);
     console.log("Finished building tables!");
   } catch (err) {
