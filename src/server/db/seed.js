@@ -107,19 +107,16 @@ const createTables = async () => {
       `);
 
     await db.query(`
-      CREATE TABLE products(
-          id SERIAL PRIMARY KEY,
-          name VARCHAR(255) UNIQUE NOT NULL,
-          description TEXT NOT NULL,
-          price INTEGER NOT NULL,
-
-          category VARCHAR(255),
-          userID INTEGER NOT NULL,
-          image_path VARCHAR(255)
-          
-
-
-          );
+    CREATE TABLE products (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) UNIQUE NOT NULL,
+      description TEXT NOT NULL,
+      price INTEGER NOT NULL,
+      category VARCHAR(255),
+      userID INTEGER NOT NULL,
+      image_path VARCHAR(255),
+      INDEX products_category_index (category)
+    );
           `);
     console.log("Finished building tables!");
   } catch (err) {

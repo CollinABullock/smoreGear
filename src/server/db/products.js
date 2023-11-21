@@ -1,4 +1,3 @@
-const { Category } = require('@mui/icons-material');
 const db = require('./client')
 // const util = require('util');
 // const insertProducts = require('./products');
@@ -84,30 +83,21 @@ async function getAllProducts() {
       throw error;
     }
   }
-  async function getProductByCategory(productId){
+
+  async function getProductsByCategory(category) {
     try {
-      const {rows: [ product ]} = await db.query(`
-
-        SELECT id, name, description, price, image_path, category FROM products
-
+      const { rows } = await db.query(`
+        SELECT * FROM products
         WHERE category = $1
-      `, [productId]);
-      return product;
+      `, [category]);
+  
+      return rows;
     } catch (error) {
       throw error;
     }
   }
-  // async function getProductByCategory(productId){
-  //   try {
-  //     const {rows: [ product ]} = await db.query(`
-  //       SELECT category FROM products
-  //       WHERE category = $3
-  //     `, [productId]);
-  //     return product;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  
+  
   
 
   async function deleteProductsById(productsId) {
@@ -139,7 +129,7 @@ module.exports = {
     createProduct,
     updateProduct,
     getAllProducts,
-    getProductByCategory,
+    getProductsByCategory,
     deleteProductsById,
     getProductById
 };

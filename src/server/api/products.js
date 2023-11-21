@@ -9,7 +9,7 @@ const {
     updateProduct,
     deleteProductsById,
     getProductById,
-    getProductByCategory
+    getProductsByCategory
 } = require('../db');
 
 productsRouter.get('/', async( req, res, next) => {
@@ -71,14 +71,17 @@ productsRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-productsRouter.get('/:category', async (req, res, next) => {
+// Example usage in your routes or controller
+productsRouter.get('/category/:category', async (req, res, next) => {
     try {
-        const products = await getProductByCategory(req.params.category);
-        res.send(products);
+      const category = req.params.category;
+      const products = await getProductsByCategory(category);
+      res.send(products);
     } catch (error) {
-        next(error);
+      next(error);
     }
   });
+  
 
 
   // requireUser needs to be added after /:id and before the async function
