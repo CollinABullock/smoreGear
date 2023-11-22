@@ -69,19 +69,7 @@ const CreatePost = () => {
 }
 }
 
- /*
- const handleNameChange = (e) => {
-  setName(e.target.value);
-};
 
-const handleDescriptionChange = (e) => {
-  setDescription(e.target.value);
-};
-
-const handlePriceChange = (e) => {
-  setPrice(e.target.value);
-};
-*/
   return (
     <>
     <NavBar />
