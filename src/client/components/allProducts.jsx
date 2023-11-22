@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./navBar";
+import CreatePost from "./create-post";
 
 export default function AllProducts() {
     const [products, setProducts] = useState([]);
@@ -45,6 +46,10 @@ return (
     onChange={(e) => setSearchParams (e.target.value.toLowerCase())}
     />
   </label>
+</div>
+
+<div>
+  <CreatePost />
 </div>
 
 {console.log("towards the end", products)}

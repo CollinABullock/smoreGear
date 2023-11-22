@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from './navBar';
 import Dropdown from './Dropdown';
 
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -29,7 +30,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function CreatePost() {
+const CreatePost = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -37,47 +38,38 @@ export default function CreatePost() {
   const userID = localStorage.getItem("userID");
 
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
    e.preventDefault();
 
    try {
-       const result = await createPost(name, description, price);
-       navigate('/products');
-   } catch (error) {
-       console.log(error);
-   }
+    const response = await fetch("http://localhost:3000/api/products/post", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: name,
+            description: description,
+            price: price,
+            userID: userID
+        })
+    });
+    
+    if (response.status === 200) {
+        // The POST request was successful (status code 200 Created)
+        const result = await response.json();
+        return result;
+    } else {
+        // Handle errors or other status codes here
+        throw new Error("Failed to create a post");
+    }
+} catch (error) {
+    console.error("Error creating a post:", error);
+    throw error;
+}
 }
 
-   async function createPost(name, description, price) {
-     try {
-         const response = await fetch("http://localhost:3000/api/products/post", {
-             method: "POST",
-             headers: {
-                 "Content-Type": "application/json",
-             },
-             body: JSON.stringify({
-                 name: name,
-                 description: description,
-                 price: price,
-                 userID: userID
-             })
-         });
-         
-         if (response.status === 200) {
-             // The POST request was successful (status code 200 Created)
-             const result = await response.json();
-             return result;
-         } else {
-             // Handle errors or other status codes here
-             throw new Error("Failed to create a post");
-         }
-     } catch (error) {
-         console.error("Error creating a post:", error);
-         throw error;
-     }
- }
-
- 
+ /*
  const handleNameChange = (e) => {
   setName(e.target.value);
 };
@@ -89,7 +81,7 @@ const handleDescriptionChange = (e) => {
 const handlePriceChange = (e) => {
   setPrice(e.target.value);
 };
-
+*/
   return (
     <>
     <NavBar />
@@ -108,13 +100,13 @@ const handlePriceChange = (e) => {
           <Typography component="h1" variant="h5">
             Sell Your Outdoor Gear!
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate  sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  onChange={handleNameChange}
+                  onChange={name => setName(name)}
                   id="name"
                   label="What are you selling?"
                   name="name"
@@ -125,7 +117,7 @@ const handlePriceChange = (e) => {
                 <TextField
                   required
                   fullWidth
-                  onChange={handleDescriptionChange}
+                  onChange={description => setDescription(description)}
                   name="password"
                   label="How would you describe it?"
                   type="description"
@@ -137,7 +129,7 @@ const handlePriceChange = (e) => {
                 <TextField
                   required
                   fullWidth
-                  onChange={handlePriceChange}
+                  onChange={price => setPrice(price)}
                   name="price"
                   label="How much do you want for it?"
                   type="price"
@@ -152,6 +144,7 @@ const handlePriceChange = (e) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onSubmit={handleSubmit}
             >
               Sell your gear!
             </Button>
@@ -167,3 +160,5 @@ const handlePriceChange = (e) => {
     </>
   );
 }
+
+export default CreatePost;
