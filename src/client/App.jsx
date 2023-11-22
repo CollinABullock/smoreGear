@@ -10,6 +10,7 @@ import CreatePost from "./components/create-post";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/shoppingcart";
 import Dropdown from "./components/Dropdown";
+import AllProductsByCategory from "./components/singleCategory";
 
 
 
@@ -63,6 +64,9 @@ export default function App() {
               items={items}
               setItems={setItems}/>} />
   <Route path ="/products/dropdown" element={<Dropdown loggedInUser={loggedInUser} 
+              items={items} 
+              setItems={setItems} />} />
+    <Route path ="/products/category/:category" element={<AllProductsByCategory loggedInUser={loggedInUser} 
               items={items} 
               setItems={setItems} />} />
 

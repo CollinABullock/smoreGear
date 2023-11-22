@@ -1,21 +1,17 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from "./navBar";
 
 function Copyright(props) {
@@ -33,15 +29,12 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function AllProducts() {
-  const [products, setProducts] = useState([]);
-  console.log("at first", products);
-  const [error, setError] = useState(null);
-  const [searchParams, setSearchParams] = useState("");
 
-async function FetchAllProducts() {
+
+async function FetchCategory(category) {
+  console.log(category);
   try {
-      const response = await fetch ("http://localhost:3000/api/products");
+      const response = await fetch (`http://localhost:3000/api/products/category/${category}`);
       const result = await response.json();
       console.log(result);
       return result
@@ -50,13 +43,22 @@ async function FetchAllProducts() {
   }
 }
 
+export default function AllProductsByCategory() {
+  const [products, setProducts] = useState([]);
+  console.log("at first", products);
+  const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useState("");
+
+  const {category} = useParams();
+  console.log(category);
+
 useEffect (() => {
-  async function getAllProducts() {
-      const response = await FetchAllProducts();
+  async function productsByCategory() {
+      const response = await FetchCategory(category);
       console.log("second response", response);
-      setProducts(response.products);
+      setProducts(response);
   }
-  getAllProducts();
+  productsByCategory();
 }, []);
 
 const displayedProducts = searchParams ? products.filter((products) =>
@@ -91,6 +93,7 @@ console.log("all products", products);
     />
   </label>
 </div>
+
 
           </Container>
         </Box>

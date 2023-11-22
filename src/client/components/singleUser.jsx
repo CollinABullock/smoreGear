@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./navBar";
 
 async function fetchSingleUser(id) {
+  console.log(id);
   try {
     const response = await fetch(`http://localhost:3000/api/users/${id}`);
     const result = await response.json();
