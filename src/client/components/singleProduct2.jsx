@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { useState, useEffect} from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ProductionQuantityLimitsSharp } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -70,6 +71,10 @@ export default function SingleProduct() {
 
   const navigate = useNavigate();
 
+  const goBack = () => {
+    navigate("/products");
+  }
+
   const handleProductDelete = async (id) => {
     try {
       await handleDelete(id, navigate); // Pass navigate function to handleDelete
@@ -87,26 +92,20 @@ export default function SingleProduct() {
   getSingleProduct()
  }, [])
 
+ 
 
  console.log("towards the end", product);
 
  function addToCart(productId) {
-  let arr = [];
+  var arr = [];
+  if (localStorage.getItem("shoppingCart") !== null) {
 
-  // Retrieve existing cart items from localStorage
-  if (localStorage.getItem("shoppingCart")) {
-    arr = JSON.parse(localStorage.getItem("shoppingCart"));
-  }
-
-  // Push new product ID to the cart array
+    arr= JSON.parse(localStorage.getItem("shoppingCart"));
+    }
+    console.log(arr);
   arr.push(productId);
-
-  // Store the updated cart array back in localStorage
-  localStorage.setItem("shoppingCart", JSON.stringify(arr));
-
-  navigate("/products/shoppingcart");
-}
-
+localStorage.setItem("shoppingCart", JSON.stringify(arr));
+ };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -134,40 +133,35 @@ export default function SingleProduct() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              textAlign: "center"
             }}
           >
-            <Typography component="h1" variant="h1">
+            <Typography component="h1" variant="h5">
               {product.name}
             </Typography>
-            <Typography component="h1" variant="h4">
-              Category: {product.category}<br />
-              Price: ${product.price}
+            <Typography component="h2" variant="h5">
+              Category:{product.category} // Price:${product.price}
             </Typography>
-            <Typography component="h2" variant="p">
+            <Typography component="p" variant="h5">
               {product.description}
             </Typography>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={() => addToCart(product.id)} 
                 sx={{ mt: 3, mb: 2 }}
               >
-               Add to cart
+                Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                <a href={`/users/${product.userid}`}>
-                <Typography component="h2" variant="p">
-                    Who's selling this?
-                  </Typography></a>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
                 </Grid>
                 <Grid item>
-                  <a href="/products">
-                <Typography component="h2" variant="p">
-                    Back to products
-                  </Typography></a>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
