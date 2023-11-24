@@ -102,14 +102,15 @@ console.log("all products", products);
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                    }}
-                    image={products.image_path}
-                  />
+               <CardMedia
+  component="div"
+  sx={{
+    // 16:9
+    pt: '56.25%',
+  }}
+  image={products.image_path ? products.image_path : 'https://ik.imagekit.io/smoregear/woman%20hiking.jpg?updatedAt=1700852561792'}
+/>
+
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {products.name}

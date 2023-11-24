@@ -133,6 +133,8 @@ const handlePriceChange = (e) => {
                 <TextField
                   required
                   fullWidth
+                  multiline
+                  rows={"6"}
                   onChange={handleDescriptionChange}
                   name="password"
                   label="How would you describe it?"

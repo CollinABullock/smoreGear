@@ -118,7 +118,7 @@ export default function SingleProduct() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${product.image_path})`,
+            backgroundImage: `url(${product.image_path ? product.image_path : 'https://ik.imagekit.io/smoregear/woman%20hiking.jpg?updatedAt=1700852561792'})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -141,7 +141,7 @@ export default function SingleProduct() {
               {product.name}
             </Typography>
             <Typography component="h1" variant="h4">
-              Category: {product.category}<br />
+              Category: <a href={`/products/category/${product.category}`}>{product.category}</a><br />
               Price: ${product.price}
             </Typography>
             <Typography component="h2" variant="p">
