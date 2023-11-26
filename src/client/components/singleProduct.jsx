@@ -160,7 +160,7 @@ export default function SingleProduct() {
                 <Grid item xs>
                 <a href={`/users/${product.userid}`}>
                 <Typography component="h2" variant="p">
-                    Who's selling this?
+                    More from this seller.
                   </Typography></a>
                 </Grid>
                 <Grid item>

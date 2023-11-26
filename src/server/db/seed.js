@@ -121,6 +121,16 @@ const products = [
   category: "water",
 
 },
+{userID: 5,
+  name: "AR 15 assault rifle",
+  description: "An AR-15–style rifle is any lightweight semi-automatic rifle based on or similar to the Colt AR-15 design. The Colt model removed the selective fire feature of its predecessor, the original ArmaLite AR-15, itself a scaled-down derivative of the AR-10 design by Eugene Stoner.",
+  price: 9,
+
+  image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/GettyImages-158539059.jpg?updatedAt=1700956202795",
+
+  category: "camping",
+
+},
 
 ];
 

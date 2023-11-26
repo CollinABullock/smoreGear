@@ -9,7 +9,8 @@ const {
     updateProduct,
     deleteProductsById,
     getProductById,
-    getProductsByCategory
+    getProductsByCategory,
+    getProductsByUserID
 } = require('../db');
 
 productsRouter.get('/', async( req, res, next) => {
@@ -76,6 +77,16 @@ productsRouter.get('/category/:category', async (req, res, next) => {
     try {
       const category = req.params.category;
       const products = await getProductsByCategory(category);
+      res.send(products);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  productsRouter.get('/userid/:userid', async (req, res, next) => {
+    try {
+      const userid = req.params.userid;
+      const products = await getProductsByUserID(userid);
       res.send(products);
     } catch (error) {
       next(error);

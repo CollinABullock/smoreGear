@@ -96,6 +96,19 @@ async function getAllProducts() {
       throw error;
     }
   }
+
+  async function getProductsByUserID(userID) {
+    try {
+      const { rows } = await db.query(`
+        SELECT * FROM products
+        WHERE userid = $1
+      `, [userID]);
+  
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  }
   
   
   
@@ -131,6 +144,7 @@ module.exports = {
     getAllProducts,
     getProductsByCategory,
     deleteProductsById,
-    getProductById
+    getProductById,
+    getProductsByUserID
 };
 
