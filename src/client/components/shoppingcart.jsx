@@ -1,7 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import NavBar from './navBar';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import NavBar from "./navBar";
 
-function ShoppingCart() {
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+        S'More Gear (T Bergin, J Browning, F Burton, C Bullock, A Nunez)
+      {' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+
+
+export default function ShoppingCart() {
   var [products, setProducts] = useState([]);
   var arr = []; 
   if (localStorage.getItem("shoppingCart") != null) {
@@ -39,25 +70,48 @@ function ShoppingCart() {
   const totalPrice = products.reduce((acc, item) => acc + parseFloat(item.price), 0);
 
   return (
-    <>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
       <NavBar />
-      <br />
-      <div>
-        {products.map(item => (
-          <div key={item.name}>
-            <h1>{item.name}</h1>
-            <h2>{item.price}</h2>
-            {item.description}
-            <h3>
-              <button className='remove-button' onClick={() => removeFromCart(item.id)}>Remove from Cart</button>
-            </h3>
-          </div>
-        ))}
-        {/* Display total price */}
-        <h3>Total Price: {totalPrice.toFixed(2)}</h3>
-      </div>
-    </>
+
+      <main>
+        <Typography variant="h1" component="h1" sx={{ paddingTop: '20px', textAlign: 'center', fontSize: '3rem' }}>
+          Cart total:  ${totalPrice}
+        </Typography>
+
+        <Container sx={{ py: 8 }} maxWidth="md">
+          <Stack spacing={4}>
+            {products.map((item) => (
+              <Card key={item.id} sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <CardMedia
+                  component="div"
+                  sx={{
+                    // 16:9
+                    pt: '56.25%',
+                  }}
+                  image={item.image_path}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {item.name}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={() => removeFromCart(item.id)}>
+                    Remove from cart
+                  </Button>
+                </CardActions>
+              </Card>
+            ))}
+          </Stack>
+        </Container>
+      </main>
+
+      {/* Footer */}
+      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+        {/* Footer content remains unchanged */}
+      </Box>
+      {/* End footer */}
+    </ThemeProvider>
   );
 }
-
-export default ShoppingCart;

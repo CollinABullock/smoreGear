@@ -11,7 +11,7 @@ import Profile from "./components/Profile";
 import ShoppingCart from "./components/shoppingcart";
 import Dropdown from "./components/Dropdown";
 import AllProductsByCategory from "./components/singleCategory";
-import Checkout from "./components/shoppingCart2";
+
 
 
 
@@ -70,7 +70,7 @@ export default function App() {
 <Route path ="/products/category/:category" element={<AllProductsByCategory loggedInUser={loggedInUser} 
               items={items} 
               setItems={setItems} />} />
-<Route path ="/products/checkout" element={<Checkout loggedInUser={loggedInUser} 
+<Route path ="/products/checkout" element={<ShoppingCart loggedInUser={loggedInUser} 
               items={items} 
               setItems={setItems} />} />
 
