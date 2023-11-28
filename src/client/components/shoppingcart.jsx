@@ -54,6 +54,7 @@ export default function ShoppingCart() {
     const updatedCart = arr.filter(id => id !== productId);
     localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
     setProducts(products.filter(item => item.id !== productId));
+    localStorage.removeItem("shoppingCart", itemId);
   };
 
   useEffect(() => {
