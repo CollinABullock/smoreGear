@@ -36,6 +36,14 @@ const CreatePost = () => {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
   const userID = localStorage.getItem("userID");
+  const [selectedCategory, setSelectedCategory] = useState();
+
+  console.log(selectedCategory);
+
+  const handleSelectCategory = (selected) => {
+    setSelectedCategory(selected);
+  };
+
 
 
   async function handleSubmit(e) {
@@ -105,8 +113,13 @@ const CreatePost = () => {
                 <TextField
                   required
                   fullWidth
+
                   onChange={description => setDescription(description)}
-                  name="password"
+
+                  multiline
+                  rows={"6"}
+                  onChange={handleDescriptionChange}
+                 name="description"
                   label="How would you describe it?"
                   type="description"
                   id="description"
@@ -126,7 +139,7 @@ const CreatePost = () => {
                 />
               </Grid>
             </Grid>
-            <Dropdown />
+            <Dropdown onSelectCategory={handleSelectCategory} />
             <Button
               type="submit"
               fullWidth
