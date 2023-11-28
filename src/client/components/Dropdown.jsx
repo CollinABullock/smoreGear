@@ -4,17 +4,22 @@ import Select from "react-dropdown-select";
 export default function Dropdown({ onSelectCategory }) {
     const [category, setCategory] = useState();
 
+    
+
     const options = [
-        { label: "Hiking", value: "Hiking" },
-        { label: "Camping", value: "Camping" },
-        { label: "Water", value: "Water" },
-        { label: "Miscellaneous", value: "Miscellaneous" }
+        { label: "Hiking", value: "hiking" },
+        { label: "Camping", value: "camping" },
+        { label: "Water", value: "water" },
+        { label: "Miscellaneous", value: "miscellaneous" }
     ];
 
-    const handleCategoryChange = (category) => {
-        setCategory(category);
-        onSelectCategory(category);
-    };
+  // Inside Dropdown component, when an option is selected:
+const handleSelectCategory = (selected) => {
+    onSelectCategory(selected); // Pass the selected value to the parent component
+  };
+  
+
+      console.log(category);
 
     return (
         <div>
@@ -23,7 +28,7 @@ export default function Dropdown({ onSelectCategory }) {
             <Select
             name="select"
             options={options}
-            onChange={value => setValue(value)}
+            onChange={handleSelectCategory}
             >
 
             </Select>

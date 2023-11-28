@@ -17,7 +17,6 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import NavBar from "./navBar";
-import CreatePost from "./create-post";
 
 function Copyright(props) {
   return (
@@ -34,15 +33,15 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function AllProducts() {
+export default function FetchProductByCategory() {
   const [products, setProducts] = useState([]);
   console.log("at first", products);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useState("");
 
-async function FetchAllProducts() {
+async function FetchAllProducts(category) {
   try {
-      const response = await fetch ("http://localhost:3000/api/products");
+      const response = await fetch (`http://localhost:3000/api/products/category/${category}`);
       const result = await response.json();
       console.log(result);
       return result
@@ -93,7 +92,6 @@ console.log("all products", products);
   </label>
 </div>
 
-
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -104,15 +102,14 @@ console.log("all products", products);
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
-               <CardMedia
-  component="div"
-  sx={{
-    // 16:9
-    pt: '56.25%',
-  }}
-  image={products.image_path ? products.image_path : 'https://ik.imagekit.io/smoregear/woman%20hiking.jpg?updatedAt=1700852561792'}
-/>
-
+                  <CardMedia
+                    component="div"
+                    sx={{
+                      // 16:9
+                      pt: '56.25%',
+                    }}
+                    image={products.image_path}
+                  />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {products.name}
