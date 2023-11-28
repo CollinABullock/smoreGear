@@ -39,6 +39,11 @@ export default function ShoppingCart() {
     arr = JSON.parse(localStorage.getItem("shoppingCart"));
   }
 
+  const clearShoppingCart = () => {
+    localStorage.removeItem("shoppingCart");
+    setProducts([]); // Clear products from the state as well
+  };
+
   async function fetchSingleProduct(id) {
     try {
       const response = await fetch(`http://localhost:3000/api/products/${id}`);
@@ -53,9 +58,9 @@ export default function ShoppingCart() {
   const removeFromCart = (productId) => {
     const updatedCart = arr.filter(id => id !== productId);
     localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
-    setProducts(products.filter(item => item.id !== productId));
-    localStorage.removeItem("shoppingCart", itemId);
+    setProducts(products.filter(item => item.id !== productId)); // Update the products state by filtering out the item to remove
   };
+  
 
   useEffect(() => {
     async function getAllProducts() {
@@ -105,8 +110,11 @@ export default function ShoppingCart() {
           <Typography variant="h1" component="h1" sx={{ paddingTop: '20px', textAlign: 'center', fontSize: '3rem' }}>
             Cart Total: ${totalPrice} <br />
             <a href="/products/checkout">
-          Proceed to checkout.
-          </a>
+          <button variant="contained">Proceed to checkout </button>
+          </a> <br />
+          <Button variant="contained" onClick={clearShoppingCart}>
+          Clear Cart
+        </Button>
         </Typography>
         </Container>
       </main>
