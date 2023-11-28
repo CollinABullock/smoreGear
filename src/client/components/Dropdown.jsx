@@ -18,14 +18,16 @@ export default function Dropdown({ onSelectCategory }) {
 
     return (
         <div>
-            <div>
-                <h4>Select Category!</h4>
-                <Select
-                    name="select"
-                    options={options}
-                    onChange={(selected) => handleCategoryChange(selected)}
-                />
-            </div>
+
+            <h4>Select Category!</h4>
+            <Select
+            name="select"
+            options={options}
+            onChange={value => setValue(value)}
+            >
+
+            </Select>
+            
         </div>
     );
 }

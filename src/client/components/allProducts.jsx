@@ -17,6 +17,7 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import NavBar from "./navBar";
+import CreatePost from "./create-post";
 
 function Copyright(props) {
   return (
@@ -90,6 +91,10 @@ console.log("all products", products);
       onChange={(e) => setSearchParams(e.target.value.toLowerCase())}
     />
   </label>
+</div>
+
+<div>
+  <CreatePost />
 </div>
 
           </Container>
