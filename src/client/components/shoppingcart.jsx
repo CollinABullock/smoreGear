@@ -75,9 +75,6 @@ export default function ShoppingCart() {
       <NavBar />
 
       <main>
-        <Typography variant="h1" component="h1" sx={{ paddingTop: '20px', textAlign: 'center', fontSize: '3rem' }}>
-          Cart total:  ${totalPrice}
-        </Typography>
 
         <Container sx={{ py: 8 }} maxWidth="md">
           <Stack spacing={4}>
@@ -104,6 +101,12 @@ export default function ShoppingCart() {
               </Card>
             ))}
           </Stack>
+          <Typography variant="h1" component="h1" sx={{ paddingTop: '20px', textAlign: 'center', fontSize: '3rem' }}>
+            Cart Total: ${totalPrice} <br />
+            <a href="/products/checkout">
+          Proceed to checkout.
+          </a>
+        </Typography>
         </Container>
       </main>
 
