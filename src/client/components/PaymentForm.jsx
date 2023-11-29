@@ -17,6 +17,11 @@ export default function PaymentForm() {
     sessionStorage.setItem('expire', expire);
   };
 
+  const handleNameChange = (event) => {
+    const name = event.target.value;
+    sessionStorage.setItem('name', name);
+  };
+
 
   return (
     <React.Fragment>
@@ -32,6 +37,7 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={handleNameChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>

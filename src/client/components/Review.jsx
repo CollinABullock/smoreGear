@@ -7,19 +7,11 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from "react";
 
 
-const addresses = sessionStorage.getItem("shippingAddress");
-
-
-const digits = sessionStorage.getItem("lastFourDigits")
-
-
-const expire = sessionStorage.getItem("expire");
-
 
 
 export default function Review() {
   const savedAddress = JSON.parse(sessionStorage.getItem("shippingAddress"));
-  console.log(addresses);
+ 
 
   var [products, setProducts] = useState([]);
   var arr = []; 
@@ -32,7 +24,7 @@ export default function Review() {
   useEffect(() => {
     const lastFourDigits = sessionStorage.getItem("lastFourDigits");
     if (lastFourDigits) {
-      setDigits(lastFourDigits); // Set the last four digits in state
+      setDigits(lastFourDigits); 
     }
   }, []); 
 
@@ -41,12 +33,22 @@ export default function Review() {
   useEffect(() => {
     const expire = sessionStorage.getItem("expire");
     if (expire) {
-      setExpire(expire); // Set the last four digits in state
+      setExpire(expire);
+    }
+  }, []); 
+
+  const [name, setName] = useState(""); // Initialize digits as a state
+
+  useEffect(() => {
+    const name = sessionStorage.getItem("name");
+    if (name) {
+      setName(name); 
     }
   }, []); 
 
   console.log("digits", digits);
   console.log("expire", expire);
+  console.log("name", name);
 
   async function fetchSingleProduct(id) {
     try {
@@ -113,9 +115,25 @@ export default function Review() {
             Payment details
           </Typography>
           <Grid container direction="column">
-          <Typography gutterBottom>xxxx-xxxx-xxxx-{digits}</Typography>
-          <Typography gutterBottom>{expire}</Typography>
-          </Grid>
+          <Grid item container justifyContent="flex-start">
+        <Typography gutterBottom>NAME ON CARD: </Typography>
+        <Typography gutterBottom sx={{ textAlign: 'right', flex: 1 }}>
+         {name}
+        </Typography>
+      </Grid>
+      <Grid item container justifyContent="flex-start">
+        <Typography gutterBottom>CARD NUMBER: </Typography>
+        <Typography gutterBottom sx={{ textAlign: 'right', flex: 1 }}>
+          xxx-xxx-xxx-{digits}
+        </Typography>
+      </Grid>
+      <Grid item container justifyContent="flex-start">
+        <Typography gutterBottom>EXPIRY DATE: </Typography>
+        <Typography gutterBottom sx={{ textAlign: 'right', flex: 1 }}>
+          {expire}
+        </Typography>
+      </Grid>
+    </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
