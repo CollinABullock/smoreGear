@@ -6,6 +6,23 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function PaymentForm() {
+  const handleCardNumberChange = (event) => {
+    const cardNumber = event.target.value;
+    const lastFourDigits = cardNumber.slice(-4); // Get the last four digits
+    sessionStorage.setItem('lastFourDigits', lastFourDigits);
+  };
+
+  const handleExpireChange = (event) => {
+    const expire = event.target.value;
+    sessionStorage.setItem('expire', expire);
+  };
+
+  const handleNameChange = (event) => {
+    const name = event.target.value;
+    sessionStorage.setItem('name', name);
+  };
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,6 +37,7 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={handleNameChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -30,6 +48,7 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            onChange={handleCardNumberChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -40,6 +59,7 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            onChange={handleExpireChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
