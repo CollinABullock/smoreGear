@@ -6,12 +6,29 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from "react";
 
-export default function AddressForm() {
-  const [name, setName] = useState([]);
-  console.log(name);
+export default function AddressForm({ onSave }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zip: '',
+    country: '',
+  });
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  console.log(formData);
+
+  const handleSave = () => {
+    sessionStorage.setItem('shippingAddress', JSON.stringify(formData));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
 
@@ -22,7 +39,7 @@ export default function AddressForm() {
       </Typography>
       <Grid container spacing={3}>
       <Grid item xs={12}>
-          <TextField
+      <TextField
             required
             id="name"
             name="name"
@@ -30,7 +47,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="Name"
             variant="standard"
-            onChange={handleNameChange}
+            onChange={handleInputChange}
           />
        
         </Grid>
@@ -43,6 +60,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -53,6 +71,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line2"
             variant="standard"
+            onChange={handleInputChange}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -64,6 +84,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            onChange={handleInputChange}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -73,6 +95,8 @@ export default function AddressForm() {
             label="State/Province/Region"
             fullWidth
             variant="standard"
+            onChange={handleInputChange}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -84,6 +108,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            onChange={handleInputChange}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -95,6 +121,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            onChange={handleInputChange}
+
           />
         </Grid>
         <Grid item xs={12}>
@@ -104,6 +132,7 @@ export default function AddressForm() {
           />
         </Grid>
       </Grid>
+      <button onClick={handleSave}>Save</button> {/* A button to trigger saving */}
     </React.Fragment>
   );
 }

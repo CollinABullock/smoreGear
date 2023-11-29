@@ -7,7 +7,9 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from "react";
 
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+const addresses = sessionStorage.getItem("shippingAddress");
+console.log(addresses);
+
 const payments = [
   { name: 'Card type', detail: 'Visa' },
   { name: 'Card holder', detail: 'Mr John Smith' },
@@ -16,6 +18,9 @@ const payments = [
 ];
 
 export default function Review() {
+  const savedAddress = JSON.parse(sessionStorage.getItem("shippingAddress"));
+  console.log(addresses);
+
   var [products, setProducts] = useState([]);
   var arr = []; 
   if (localStorage.getItem("shoppingCart") != null) {
@@ -76,8 +81,11 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{savedAddress.name}</Typography>
+          <Typography gutterBottom>{savedAddress.address1}</Typography>
+          <Typography gutterBottom>{savedAddress.address2}</Typography>
+          <Typography gutterBottom>{savedAddress.city}, {savedAddress.state}</Typography>
+          <Typography gutterBottom>{savedAddress.zip}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
