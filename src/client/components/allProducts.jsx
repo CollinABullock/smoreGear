@@ -59,6 +59,26 @@ const displayedProducts = searchParams ? products.filter((products) =>
 products.name.toLowerCase().includes(searchParams)
 ) : products;
 
+console.log("displayed products", displayedProducts);
+console.log("all products", products);
+
+function addToCart(productId) {
+  let arr = [];
+
+  // Retrieve existing cart items from localStorage
+  if (localStorage.getItem("shoppingCart")) {
+    arr = JSON.parse(localStorage.getItem("shoppingCart"));
+  }
+
+  // Push new product ID to the cart array
+  arr.push(productId);
+
+  // Store the updated cart array back in localStorage
+  localStorage.setItem("shoppingCart", JSON.stringify(arr));
+
+}
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -115,7 +135,7 @@ products.name.toLowerCase().includes(searchParams)
                   </CardContent>
                   <CardActions>
                     <Button size="small" href={`/products/${products.id}`}>More Details</Button>
-                   
+                    <Button size= "small" onClick={() => addToCart(products.id)}>Add To Cart</Button>
                   </CardActions>
                 </Card>
               </Grid>
