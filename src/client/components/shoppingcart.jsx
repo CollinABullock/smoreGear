@@ -44,23 +44,42 @@ export default function ShoppingCart() {
     setProducts([]); // Clear products from the state as well
   };
 
+
   async function fetchSingleProduct(id) {
     try {
       const response = await fetch(`http://localhost:3000/api/products/${id}`);
       const result = await response.json();
+      const quantity = result.quantity || 1;
       console.log(result);
-      return result;
+      return {...result, quantity };
     } catch (error) {
       console.log(error);
     }
   }
 
-  const removeFromCart = (productId) => {
+ const removeFromCart = (productId) => {
     const updatedCart = arr.filter(id => id !== productId);
     localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
     setProducts(products.filter(item => item.id !== productId)); // Update the products state by filtering out the item to remove
   };
-  
+
+  const incrementQuantity = (productId) => { 
+    const updatedCart = arr.map((item) => 
+    item.id === productId ? {...item, quantity: item.quantity + 1 } : item);
+   localStorage.setItem ("shoppingCart", JSON.stringify(updatedCart))
+   setProducts (
+    products.map((item) => item.id === productId ? {...item, quantity: item.quantity + 1} : item)
+   );
+  };
+
+  const decrementQuantity = (productId) => { 
+    const updatedCart = arr.map((item) => 
+    item.id === productId ? {...item, quantity: item.quantity - 1 } : item);
+   localStorage.setItem ("shoppingCart", JSON.stringify(updatedCart))
+   setProducts (
+    products.map((item) => item.id === productId ? {...item, quantity: item.quantity - 1} : item)
+   );
+  };
 
   useEffect(() => {
     async function getAllProducts() {
@@ -96,10 +115,21 @@ export default function ShoppingCart() {
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {item.name}
+                    {item.name} <br />
+                    ${item.price}
                   </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Quantity: {item.quantity}
+                  </Typography>
+                
                 </CardContent>
                 <CardActions>
+                <Button size="small" onClick={() => decrementQuantity(item.id)}>
+                    -
+                  </Button>
+                  <Button size="small" onClick={() => incrementQuantity(item.id)}>
+                    +
+                  </Button>
                   <Button size="small" onClick={() => removeFromCart(item.id)}>
                     Remove from cart
                   </Button>
