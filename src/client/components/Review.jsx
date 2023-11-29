@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 
 
 const addresses = sessionStorage.getItem("shippingAddress");
-console.log(addresses);
 
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
+
+const digits = sessionStorage.getItem("lastFourDigits")
+
+
+const expire = sessionStorage.getItem("expire");
+
+
 
 export default function Review() {
   const savedAddress = JSON.parse(sessionStorage.getItem("shippingAddress"));
@@ -26,6 +26,27 @@ export default function Review() {
   if (localStorage.getItem("shoppingCart") != null) {
     arr = JSON.parse(localStorage.getItem("shoppingCart"));
   }
+
+  const [digits, setDigits] = useState(""); // Initialize digits as a state
+
+  useEffect(() => {
+    const lastFourDigits = sessionStorage.getItem("lastFourDigits");
+    if (lastFourDigits) {
+      setDigits(lastFourDigits); // Set the last four digits in state
+    }
+  }, []); 
+
+  const [expire, setExpire] = useState(""); // Initialize digits as a state
+
+  useEffect(() => {
+    const expire = sessionStorage.getItem("expire");
+    if (expire) {
+      setExpire(expire); // Set the last four digits in state
+    }
+  }, []); 
+
+  console.log("digits", digits);
+  console.log("expire", expire);
 
   async function fetchSingleProduct(id) {
     try {
@@ -91,17 +112,9 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
+          <Grid container direction="column">
+          <Typography gutterBottom>xxxx-xxxx-xxxx-{digits}</Typography>
+          <Typography gutterBottom>{expire}</Typography>
           </Grid>
         </Grid>
       </Grid>
