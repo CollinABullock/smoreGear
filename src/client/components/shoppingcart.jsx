@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Review from './Review';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from "./navBar";
@@ -99,6 +100,7 @@ export default function ShoppingCart() {
                     {item.name}
                   </Typography>
                 </CardContent>
+                
                 <CardActions>
                   <Button size="small" onClick={() => removeFromCart(item.id)}>
                     Remove from cart
