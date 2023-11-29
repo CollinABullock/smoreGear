@@ -10,6 +10,7 @@ export default function Dropdown({ onSelectCategory }) {
         { label: "Hiking", value: "hiking" },
         { label: "Camping", value: "camping" },
         { label: "Water", value: "water" },
+        { label: "Winter", value: "winter" },
         { label: "Miscellaneous", value: "miscellaneous" }
     ];
 

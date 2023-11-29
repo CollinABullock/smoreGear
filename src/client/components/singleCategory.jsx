@@ -73,7 +73,10 @@ console.log("all products", products);
       <NavBar />
 
       <main>
-        {/* Hero unit */}
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <Typography variant="h1" component="h1" sx={{paddingTop: "20px", textAlign: 'center', fontSize: "3rem"}}>
+                      All products in the {category} category
+                    </Typography>
         <Box
           sx={{
             bgcolor: 'background.paper',
@@ -97,8 +100,7 @@ console.log("all products", products);
 
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
+       
           <Grid container spacing={4}>
             {!error && displayedProducts.map((products) => (
               <Grid item key={products} xs={12} sm={6} md={4}>

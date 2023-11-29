@@ -1,22 +1,19 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import NavBar from "./navBar";
+import { Category } from '@mui/icons-material';
+
 
 function Copyright(props) {
   return (
@@ -50,6 +47,7 @@ async function FetchAllProducts(category) {
   }
 }
 
+
 useEffect (() => {
   async function getAllProducts() {
       const response = await FetchAllProducts();
@@ -71,7 +69,9 @@ return (
     <NavBar />
 
     <main>
-      {/* Hero unit */}
+    <Typography variant="h1" component="h1" sx={{paddingTop: "20px", textAlign: 'center', fontSize: "3rem"}}>
+           Category:            
+    </Typography>
       <Box
         sx={{
           bgcolor: 'background.paper',
@@ -118,7 +118,7 @@ image={products.image_path ? products.image_path : 'https://ik.imagekit.io/smore
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" href={`/products/${products.id}`}>More Details</Button>
+                  <Button size="small" href={`/products/${products.id}`}>More Details, Sucker</Button>
                  
                 </CardActions>
               </Card>
