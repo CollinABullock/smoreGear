@@ -191,8 +191,7 @@ const Login = (props) => {
                 Sign In
               </Button>
               <Button
-                type="submit"
-                onClick={navigate("/products")}
+              href='/products'
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }
