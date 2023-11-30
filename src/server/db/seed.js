@@ -155,7 +155,8 @@ const createTables = async () => {
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) DEFAULT 'name',
           email VARCHAR(255) UNIQUE NOT NULL,
-          password VARCHAR(255) NOT NULL
+          password VARCHAR(255) NOT NULL,
+          isAdmin BOOLEAN DEFAULT FALSE
       );
       `);
 
@@ -166,7 +167,7 @@ const createTables = async () => {
       description TEXT NOT NULL,
       price INTEGER NOT NULL,
       category VARCHAR(255),
-      quantity INTEGER NOT NULL,
+      quantity INTEGER,
       userID INTEGER NOT NULL,
       image_path VARCHAR(255)
     );
@@ -188,6 +189,7 @@ const insertUsers = async () => {
         name: user.name,
         email: user.email,
         password: user.password,
+        isAdmin: user.isAdmin,
       });
     }
     console.log("Seed data inserted successfully.");

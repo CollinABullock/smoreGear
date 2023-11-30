@@ -49,6 +49,7 @@ export default function Review() {
   console.log("digits", digits);
   console.log("expire", expire);
   console.log("name", name);
+  console.log(products);
 
   async function fetchSingleProduct(id) {
     try {

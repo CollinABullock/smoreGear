@@ -40,14 +40,14 @@ async function updateUser(id, fields = {}) {
   }
 }
 
-const createUser = async({ name, email, password }) => {
+const createUser = async({ name, email, password, isAdmin }) => {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     try {
         const { rows: [user ] } = await db.query(`
-        INSERT INTO users(name, email, password)
-        VALUES($1, $2, $3)
+        INSERT INTO users(name, email, password, isAdmin)
+        VALUES($1, $2, $3, $4)
         ON CONFLICT (email) DO NOTHING
-        RETURNING *`, [name, email, hashedPassword]);
+        RETURNING *`, [name, email, hashedPassword, isAdmin]);
 
         return user;
     } catch (err) {

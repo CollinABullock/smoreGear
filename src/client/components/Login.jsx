@@ -95,7 +95,10 @@ const Login = (props) => {
         localStorage.setItem("userName", result.user.name);
         localStorage.setItem("userID", result.user.id)
         localStorage.setItem("userEmail", result.user.email)
+        localStorage.setItem("isAdmin", result.user.isadmin)
         navigate('/products');
+
+        console.log("isAdmin:", result.user.isadmin);
 
         // Log information about the response before consuming the body
         console.log(response.status, response.headers, response.statusText, result.token);
