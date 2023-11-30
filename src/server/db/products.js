@@ -3,12 +3,12 @@ const db = require('./client')
 // const insertProducts = require('./products');
 
 
-const createProduct = async({ name, description, price, userID, category, image_path }) => {
+const createProduct = async({ name, description, price, userID, category, image_path, quantity }) => {
     try {
         const { rows: [product ] } = await db.query(`
-        INSERT INTO products(name, description, price, userID, category, image_path)
-        VALUES($1, $2, $3, $4, $5, $6 )
-        RETURNING *`, [name, description, price, userID, category, image_path]);
+        INSERT INTO products(name, description, price, userID, category, image_path, quantity)
+        VALUES($1, $2, $3, $4, $5, $6, $7 )
+        RETURNING *`, [name, description, price, userID, category, image_path, quantity]);
 
 
         return product;
@@ -72,7 +72,7 @@ async function getAllProducts() {
       const { rows } = await db.query(`
 
 
-        SELECT id, name, description, price, image_path, category, userID
+        SELECT id, name, description, price, image_path, category, userID, quantity
 
 
         FROM products;
