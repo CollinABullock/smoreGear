@@ -25,6 +25,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
    const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,6 +33,16 @@ function ResponsiveAppBar() {
       setIsLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+  const adminStatus = localStorage.getItem("isAdmin");
+  if (adminStatus !== null) {
+    const isAdmin = adminStatus === "true"; // Convert the string to a boolean
+    setAdmin(isAdmin);
+  } else {
+    setAdmin(false); // Set default value if the key doesn't exist in localStorage
+  }
+}, []);
 
   let navigate = useNavigate();
 
@@ -115,7 +126,13 @@ function ResponsiveAppBar() {
             S'MORE GEAR
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: "space-evenly", fontSize: "2em" } }}>
-            
+          <Button
+                href='/users'
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily: "impact", fontSize: "1em" }}
+              >
+               {admin ? <span>See all users</span> : null}
+              </Button>
               <Button
                 href='/products'
                 onClick={handleCloseNavMenu}
