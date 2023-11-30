@@ -172,8 +172,8 @@ function ResponsiveAppBar() {
                   <button id="logout-button" sx={{margin: "0 auto"}}
             onClick={() => {
               setIsLoggedIn(false);
-              localStorage.clear;
-              sessionStorage.clear
+              localStorage.clear();
+              sessionStorage.clear();
               navigate("/")
           }}>Logout
           </button>

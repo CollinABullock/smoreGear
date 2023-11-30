@@ -146,7 +146,7 @@ export default function ShoppingCart() {
           <Typography variant="h1" component="h1" sx={{ paddingTop: '20px', textAlign: 'center', fontSize: '3rem' }}>
             Cart Total: ${totalPrice} <br />
             <a href="/products/checkout">
-          <button variant="contained">Proceed to checkout </button>
+          <Button variant="contained">Proceed to checkout </Button>
           </a> <br />
           <Button variant="contained" onClick={clearShoppingCart}>
           Clear Cart

@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from "react";
 
-export default function AddressForm({ onSave }) {
+export default function AddressForm() {
   const [formData, setFormData] = useState({
     name: '',
     address1: '',
@@ -17,18 +17,14 @@ export default function AddressForm({ onSave }) {
     country: '',
   });
 
-  console.log(formData);
-
-  const handleSave = () => {
-    sessionStorage.setItem('shippingAddress', JSON.stringify(formData));
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
+    const newFormData = {
       ...formData,
       [name]: value,
-    });
+    };
+    setFormData(newFormData);
+    sessionStorage.setItem('shippingAddress', JSON.stringify(newFormData));
   };
 
 
@@ -132,7 +128,6 @@ export default function AddressForm({ onSave }) {
           />
         </Grid>
       </Grid>
-      <button onClick={handleSave}>Save</button> {/* A button to trigger saving */}
     </React.Fragment>
   );
 }
