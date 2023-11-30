@@ -190,6 +190,14 @@ const Login = (props) => {
               >
                 Sign In
               </Button>
+              <Button
+                type="submit"
+                onClick={navigate("/products")}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }
+            }
+              >Continue as guest</Button>
               <p>{message}</p>
               <Grid container>
                 <Grid item>

@@ -177,6 +177,8 @@ function ResponsiveAppBar() {
               localStorage.removeItem("userName");
               localStorage.removeItem("userID");
               localStorage.removeItem("userEmail");
+              localStorage.removeItem("isAdmin");
+              localStorage.removeItem("shoppingCart")
               navigate("/")
           }}>Logout
           </button>
@@ -265,6 +267,11 @@ function ResponsiveAppBar() {
               >
                Register
               </Button>
+              <Button
+                href='/products/shoppingcart'
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily: "impact", fontSize: "1em" }}
+              > Checkout as guest</Button>
           </Box>
 
           

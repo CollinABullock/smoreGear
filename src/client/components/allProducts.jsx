@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import NavBar from "./navBar";
-import { Category } from '@mui/icons-material';
+import { Category, TroubleshootOutlined } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -34,6 +34,9 @@ export default function AllProducts() {
   console.log("at first", products);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useState("");
+  const [admin, setAdmin] = useState(false);
+
+  console.log(admin);
 
 async function FetchAllProducts() {
   try {
@@ -43,6 +46,39 @@ async function FetchAllProducts() {
       return result
   } catch (error) {
       console.log(error);
+  }
+}
+
+useEffect(() => {
+  const adminStatus = localStorage.getItem("isAdmin");
+  if (adminStatus !== null) {
+    const isAdmin = adminStatus === "true"; // Convert the string to a boolean
+    setAdmin(isAdmin);
+  } else {
+    setAdmin(false); // Set default value if the key doesn't exist in localStorage
+  }
+}, []);
+
+async function deletePost(id) {
+  try {
+      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+          method: "DELETE",
+          headers: {
+              "Content-Type": "application/json",
+          },
+      });
+      
+      // if (response.status === 200) {
+      //     // The POST request was successful (status code 200 Created)
+      //     const result = await response.json();
+      //     return result;
+      // } else {
+      //     // Handle errors or other status codes here
+      //     throw new Error("Failed to create a post");
+      // }
+  } catch (error) {
+      console.error("Error creating a post:", error);
+      throw error;
   }
 }
 
@@ -83,7 +119,6 @@ function addToCart(productId) {
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <NavBar />
-
       <main>
       <Typography variant="h1" component="h1" sx={{paddingTop: "20px", textAlign: 'center', fontSize: "3rem"}}>
                       {/* {Category} */}
@@ -136,6 +171,9 @@ function addToCart(productId) {
                   <CardActions>
                     <Button size="small" href={`/products/${products.id}`}>More Details</Button>
                     <Button size= "small" onClick={() => addToCart(products.id)}>Add To Cart</Button>
+                    <Button size="small" onClick={() => deletePost(products.id)}>
+  {admin ? <span>Delete</span> : null}
+</Button>
                   </CardActions>
                 </Card>
               </Grid>
