@@ -59,24 +59,28 @@ export default function ShoppingCart() {
   }
 
  const removeFromCart = (productId) => {
-    const updatedCart = arr.filter(id => id !== productId);
+    const updatedCart = products.filter(id => id !== productId);
     localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
     setProducts(products.filter(item => item.id !== productId)); // Update the products state by filtering out the item to remove
   };
 
+
+
   const incrementQuantity = (productId) => { 
-    const updatedCart = arr.map((item) => 
+    const increaseCart = products.map((item) => 
     item.id === productId ? {...item, quantity: item.quantity + 1 } : item);
-   localStorage.setItem ("shoppingCart", JSON.stringify(updatedCart))
-   setProducts (
-    products.map((item) => item.id === productId ? {...item, quantity: item.quantity + 1} : item)
+   localStorage.setItem ("shoppingCart", JSON.stringify(increaseCart))
+   setProducts ( increaseCart
+    
    );
   };
 
+  // products.map((item) => item.id === productId ? {...item, quantity: item.quantity + 1} : item)
+
   const decrementQuantity = (productId) => { 
-    const updatedCart = arr.map((item) => 
+    const decreaseCart = products.map((item) => 
     item.id === productId ? {...item, quantity: item.quantity - 1 } : item);
-   localStorage.setItem ("shoppingCart", JSON.stringify(updatedCart))
+   localStorage.setItem ("shoppingCart", JSON.stringify(decreaseCart))
    setProducts (
     products.map((item) => item.id === productId ? {...item, quantity: item.quantity - 1} : item)
    );
@@ -93,7 +97,7 @@ export default function ShoppingCart() {
   }, []);
 
   // Calculate total price
-  const totalPrice = products.reduce((acc, item) => acc + parseFloat(item.price), 0);
+  const totalPrice = products.reduce((acc, item) => acc + parseFloat(item.price * item.quantity), 0);
 
   return (
     <ThemeProvider theme={defaultTheme}>

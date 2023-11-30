@@ -36,7 +36,7 @@ productsRouter.patch('/:id', async (req, res, next) => {
 
 
 productsRouter.post('/post', async(req, res, next) => {
-   const {name, description, price, category, userID} = req.body;
+   const {name, description, price, category, userID, quantity} = req.body;
 
    const postProducts = {};
 
@@ -46,6 +46,7 @@ productsRouter.post('/post', async(req, res, next) => {
     postProducts.price = price;
     postProducts.category = category;
     postProducts.userID = userID;
+    postProducts.quantity = quantity;
 
     const products = await createProduct(postProducts)
 

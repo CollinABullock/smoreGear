@@ -41,8 +41,9 @@ const products = [
   name: "kyak",
   description: "old and used",
   price: 20,
-  image_path: 'https://ik.imagekit.io/7zon7c8tt/TB100NXT_FadeDeepBlueWhite_TOP.webp?updatedAt=1700151670835',
+  image_path: "https://ik.imagekit.io/7zon7c8tt/TB100NXT_FadeDeepBlueWhite_TOP.webp?updatedAt=1700151670835",
   category: "water",
+  quantity: 0,
 },
 
 {
@@ -50,25 +51,27 @@ const products = [
   name: "Camping Tent",
   description: "Family size. Fits up to 4 people",
   price: 300,
-  image_path: 'https://ik.imagekit.io/7zon7c8tt/shopping.webp?updatedAt=1700151792457',
+  image_path: "https://ik.imagekit.io/7zon7c8tt/shopping.webp?updatedAt=1700151792457",
   category: "camping",
+  quantity: 0,
 },
 {
   userID: 3,
   name: "Bear spray",
   description: "Potent bear spray to keep them away",
   price: 50,
-  image_path: 'https://ik.imagekit.io/7zon7c8tt/61e485coETL._AC_UF1000,1000_QL80_.jpg?updatedAt=1700152030955',
+  image_path: "https://ik.imagekit.io/7zon7c8tt/61e485coETL._AC_UF1000,1000_QL80_.jpg?updatedAt=1700152030955",
   category: "camping",
+  quantity: 0,
 },
 {
   userID: 4,
   name: "Trekking Poles",
   description: "Carbon fiber professional poles",
   price: 75,
-  image_path: 'https://ik.imagekit.io/7zon7c8tt/81AOYY-23oL.__AC_SX300_SY300_QL70_FMwebp_.webp?updatedAt=1700152105724',
+  image_path: "https://ik.imagekit.io/7zon7c8tt/81AOYY-23oL.__AC_SX300_SY300_QL70_FMwebp_.webp?updatedAt=1700152105724",
   category: "hiking",
-
+  quantity: 0,
 },
 {
   userID: 5,
@@ -79,7 +82,7 @@ const products = [
   image_path: "https://ik.imagekit.io/7zon7c8tt/61W7cLtNiLL._AC_SY625_.jpg?updatedAt=1700152181361",
 
   category: "hiking",
-
+  quantity: 0,
 },
 {userID: 5,
   name: "NRS Slipstream Fishing Raft Package",
@@ -89,7 +92,7 @@ const products = [
   image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/slipstream-fullraft-1024x576.jpg?updatedAt=1700685135363",
 
   category: "water",
-
+  quantity: 0,
 },
 {userID: 5,
   name: "JB’S Jet Ski’s 2023 Sea-Doo Spark 900 Brand",
@@ -99,7 +102,7 @@ const products = [
   image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/-processed.jpeg?updatedAt=1700685243587",
 
   category: "water",
-
+  quantity: 0,
 },
 {userID: 5,
   name: "Slightly used harpoon gun",
@@ -109,7 +112,7 @@ const products = [
   image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/harpoon-gun.jpg?updatedAt=1700685462102",
 
   category: "water",
-
+  quantity: 0,
 },
 {userID: 1,
   name: "Dolphin Skull",
@@ -119,7 +122,7 @@ const products = [
   image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/Z2277.jpg?updatedAt=1700686326540",
 
   category: "water",
-
+  quantity: 0,
 },
 {userID: 5,
   name: "AR 15 assault rifle",
@@ -129,7 +132,7 @@ const products = [
   image_path: "https://ik.imagekit.io/smoregear/SMORE%20GEAR%20SEED%20DATA/GettyImages-158539059.jpg?updatedAt=1700956202795",
 
   category: "camping",
-
+  quantity: 0,
 },
 
 ];
@@ -163,6 +166,7 @@ const createTables = async () => {
       description TEXT NOT NULL,
       price INTEGER NOT NULL,
       category VARCHAR(255),
+      quantity INTEGER NOT NULL,
       userID INTEGER NOT NULL,
       image_path VARCHAR(255)
     );
@@ -202,6 +206,7 @@ const insertProducts = async () => {
         userID: product.userID,
         image_path: product.image_path,
         category: product.category,
+        quantity: product.quantity,
       });
     }
     console.log("Seed data inserted successfully.");
