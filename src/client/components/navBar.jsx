@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { alignProperty } from '@mui/material/styles/cssUtils';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const pages = ["What's For Sale?", 'Sell Something'];
